@@ -978,6 +978,8 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
+  height: 200px;
+  width: 200px;
   background-image: url("../../../../images/bannerbg.jpg");
   background-position: 0px -200px;
   background-repeat: no-repeat;
@@ -1860,7 +1862,7 @@ section {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cdd9b3;
+  background: #42227f;
 }
 .links-of-blogroll {
   font-size: 13px;
