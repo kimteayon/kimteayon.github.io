@@ -981,6 +981,11 @@ pre .javascript .function {
   background-image: url("../../../../images/bannerbg.jpg");
   background-position: 0px -200px;
   background-repeat: no-repeat;
+  opacity: 0.7;
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+  -webkit-transition-duration: 0.7s;
+  transition-duration: 0.7s;
 }
 .header-inner {
   position: relative;
@@ -991,6 +996,7 @@ pre .javascript .function {
 }
 .site-meta {
   margin: 0;
+  margin-bottom: 30px;
   text-align: center;
 }
 @media (max-width: 767px) {
@@ -1023,9 +1029,16 @@ pre .javascript .function {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-subtitle {
-  margin-top: 10px;
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+  -webkit-transition-duration: 0.7s;
+  transition-duration: 0.7s;
   font-size: 13px;
   color: #999;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: 290px !important;
+  top: 300px !important;
 }
 .use-motion .brand {
   opacity: 0;
@@ -1078,6 +1091,18 @@ pre .javascript .function {
   padding-left: 0;
   text-align: center;
 }
+.gird:hover .header {
+  opacity: 1;
+  background-position: 0px -150px;
+}
+.gird:hover .site-subtitle {
+  top: 135px !important;
+  opacity: 1 !important;
+}
+.gird {
+  position: relative;
+  background-color: #000;
+}
 .menu .menu-item {
   display: inline-block;
   margin: 0 10px;
@@ -1097,9 +1122,10 @@ pre .javascript .function {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
+  color: #fff;
 }
 .menu .menu-item a:hover {
-  border-bottom-color: #222;
+  border-bottom-color: #fff;
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1681,7 +1707,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #df52ff;
+  background: #ff6154;
 }
 .links-of-blogroll {
   font-size: 13px;
