@@ -1097,6 +1097,11 @@ pre .javascript .function {
   position: relative;
   background-color: #fff;
 }
+.site-title :hover .site-subtitle {
+  opacity: 1 !important;
+  position: absolute !important;
+  top: 0px !important;
+}
 .menu .menu-item {
   display: inline-block;
   margin: 0 10px;
@@ -1120,11 +1125,6 @@ pre .javascript .function {
 }
 .menu .menu-item a:hover {
   border-bottom-color: #555;
-}
-.menu .menu-item a:hover .site-subtitle {
-  opacity: 1 !important;
-  position: absolute !important;
-  top: 0px !important;
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1706,7 +1706,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffffb4;
+  background: #87ff8c;
 }
 .links-of-blogroll {
   font-size: 13px;
