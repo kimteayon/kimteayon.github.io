@@ -1095,7 +1095,7 @@ pre .javascript .function {
   position: relative;
   background-color: #fff;
 }
-.site-title :hover .site-subtitle {
+.gird:hover .site-subtitle {
   opacity: 1 !important;
 }
 .menu .menu-item {
@@ -1702,7 +1702,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff3b;
+  background: #2d6e01;
 }
 .links-of-blogroll {
   font-size: 13px;
