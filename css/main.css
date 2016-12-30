@@ -988,6 +988,7 @@ pre .javascript .function {
   transition-duration: 0.7s;
   width: 100%;
   height: 100%;
+  background-position: center center;
 }
 .header-inner {
   position: relative;
@@ -1701,7 +1702,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9a3c50;
+  background: #78c1ff;
 }
 .links-of-blogroll {
   font-size: 13px;
