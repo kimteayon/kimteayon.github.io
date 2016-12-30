@@ -1117,7 +1117,7 @@ pre .javascript .function {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
-  color: #555;
+  color: #000;
 }
 .menu .menu-item a:hover {
   border-bottom-color: #000;
@@ -1702,7 +1702,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #37ff2f;
+  background: #ff9fff;
 }
 .links-of-blogroll {
   font-size: 13px;
