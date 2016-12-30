@@ -977,7 +977,7 @@ pre .javascript .function {
 .back-to-top.back-to-top-on {
   bottom: 19px;
 }
-.header {
+.2eader {
   background-image: url("../../../../images/background.jpg");
   background-repeat: no-repeat;
   opacity: 1;
@@ -989,6 +989,11 @@ pre .javascript .function {
   width: 100%;
   height: 100%;
   background-position: center center;
+}
+.header {
+  width: 100%;
+  height: 100%;
+  background-color: #555;
 }
 .header-inner {
   position: relative;
@@ -1117,10 +1122,10 @@ pre .javascript .function {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
-  color: #000;
+  color: #fff;
 }
 .menu .menu-item a:hover {
-  border-bottom-color: #000;
+  border-bottom-color: #fff;
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1702,7 +1707,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fffaff;
+  background: #ffff52;
 }
 .links-of-blogroll {
   font-size: 13px;
