@@ -1078,6 +1078,7 @@ pre .javascript .function {
     margin: 0 -10px;
     padding: 0 10px;
     clear: both;
+    background-color: #222;
     border-top: 1px solid #ddd;
   }
 }
@@ -1707,7 +1708,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #37ff6e;
+  background: #2a7075;
 }
 .links-of-blogroll {
   font-size: 13px;
