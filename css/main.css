@@ -1043,7 +1043,7 @@ pre .javascript .function {
   transition-duration: 0.7s;
   font-size: 13px;
   color: #999;
-  opacity: 0 !important;
+  opacity: 1 !important;
 }
 .use-motion .brand {
   opacity: 0;
@@ -1708,7 +1708,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a4b3ff;
+  background: #c66bff;
 }
 .links-of-blogroll {
   font-size: 13px;
