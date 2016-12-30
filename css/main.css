@@ -1120,7 +1120,7 @@ pre .javascript .function {
   color: #555;
 }
 .menu .menu-item a:hover {
-  border-bottom-color: #555;
+  border-bottom-color: #000;
 }
 .menu .menu-item .fa {
   margin-right: 5px;
@@ -1702,7 +1702,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2d6e01;
+  background: #37ff2f;
 }
 .links-of-blogroll {
   font-size: 13px;
