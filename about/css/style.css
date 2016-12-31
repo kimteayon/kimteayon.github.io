@@ -9,6 +9,19 @@
 	margin-top:0px;
 	margin-right: 400px;
 }
+@media screen and (max-width: 768px){
+  #animation {
+    animation: flight 3s ease-in-out 0s infinite alternate none;
+    -webkit-animation: flight 3s ease-in-out 0s infinite alternate none;
+    width: 50%;
+    float: right;
+    height: 100%;
+    z-index: 100;
+    margin-top:0px;
+    margin-right: 200px;
+  }
+}
+
 .spaceship {
 	position: absolute;
 	-webkit-transform: scale(0.76) rotate(45deg);
