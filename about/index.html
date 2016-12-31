@@ -90,7 +90,7 @@
 <meta property="og:title" content="Towards the age of 21">
 <meta property="og:url" content="http://towards21.com/about/index.html">
 <meta property="og:site_name" content="Towards the age of 21">
-<meta property="og:updated_time" content="2016-12-31T09:07:44.000Z">
+<meta property="og:updated_time" content="2016-12-31T09:52:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Towards the age of 21">
 
@@ -276,9 +276,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- 代码部分begin -->
     <div id="animation">
-        <a href="#" title="点击了解更多">
+        <a id="audio-btn" class="on" onclick="lanren.changeClass(this,'media')">
+          <audio loop="loop" src="css/11：11.mp3" id="media" preload="preload"></audio>
             <div class="spaceship">
                 <div class="antenna"></div>
                 <div class="body"></div>
@@ -298,8 +298,27 @@
             </div>
         </a>
     </div>
-    <!-- 代码部分end -->
+
 </body>
+<script src="http://www.lanrenzhijia.com/ajaxjs/jquery.min.js"></script>
+<script>
+var lanren = {
+	changeClass: function (target,id) {
+       	var className = $(target).attr('class');
+       	var ids = document.getElementById(id);
+       	(className == 'on')
+           	? $(target).removeClass('on').addClass('off')
+           	: $(target).removeClass('off').addClass('on');
+       	(className == 'on')
+           	? ids.pause()
+           	: ids.play();
+   	},
+	play:function(){
+		document.getElementById('media').play();
+	}
+}
+lanren.play();
+</script>
 </html>
 
     
