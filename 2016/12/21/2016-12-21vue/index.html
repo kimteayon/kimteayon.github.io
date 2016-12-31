@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统.">
+<meta name="description" content="Vue.js &amp;#x7684;&amp;#x6838;&amp;#x5FC3;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5141;&amp;#x8BB8;&amp;#x4F60;&amp;#x91C7;&amp;#x7528;&amp;#x7B80;&amp;#x6D01;&amp;#x7684;&amp;#x6A21;&amp;#x677F;&amp;#x8BED;&amp;#x6CD5;&amp;#x6765;&amp;#x58F0;&amp;#x660E;&amp;#x5F0F;&amp;#x7684;&amp;#x5C06;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="声明式渲染">
 <meta property="og:url" content="http://towards21.com/2016/12/21/2016-12-21vue/index.html">
 <meta property="og:site_name" content="Towards the age of 21">
-<meta property="og:description" content="Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统.">
+<meta property="og:description" content="Vue.js &amp;#x7684;&amp;#x6838;&amp;#x5FC3;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5141;&amp;#x8BB8;&amp;#x4F60;&amp;#x91C7;&amp;#x7528;&amp;#x7B80;&amp;#x6D01;&amp;#x7684;&amp;#x6A21;&amp;#x677F;&amp;#x8BED;&amp;#x6CD5;&amp;#x6765;&amp;#x58F0;&amp;#x660E;&amp;#x5F0F;&amp;#x7684;&amp;#x5C06;&amp;">
 <meta property="og:updated_time" content="2016-12-21T15:22:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="声明式渲染">
-<meta name="twitter:description" content="Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统.">
+<meta name="twitter:description" content="Vue.js &amp;#x7684;&amp;#x6838;&amp;#x5FC3;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5141;&amp;#x8BB8;&amp;#x4F60;&amp;#x91C7;&amp;#x7528;&amp;#x7B80;&amp;#x6D01;&amp;#x7684;&amp;#x6A21;&amp;#x677F;&amp;#x8BED;&amp;#x6CD5;&amp;#x6765;&amp;#x58F0;&amp;#x660E;&amp;#x5F0F;&amp;#x7684;&amp;#x5C06;&amp;">
 
 
 
@@ -355,13 +355,13 @@
       
 
       
-        <p>Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统.</p>
+        <p>Vue.js &#x7684;&#x6838;&#x5FC3;&#x662F;&#x4E00;&#x4E2A;&#x5141;&#x8BB8;&#x4F60;&#x91C7;&#x7528;&#x7B80;&#x6D01;&#x7684;&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#x6765;&#x58F0;&#x660E;&#x5F0F;&#x7684;&#x5C06;&#x6570;&#x636E;&#x6E32;&#x67D3;&#x8FDB; DOM &#x7684;&#x7CFB;&#x7EDF;.</p>
 <a id="more"></a>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div id="app"&gt;</div><div class="line">  &#123;&#123; message &#125;&#125;</div><div class="line">&lt;/div&gt;</div><div class="line">var app = new Vue(&#123;</div><div class="line">  el: '#app',</div><div class="line">  data: &#123;</div><div class="line">    message: 'Hello Vue!'</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  {{ message }}</div><div class="line">&lt;/div&gt;</div><div class="line">var app = new Vue({</div><div class="line">  el: &apos;#app&apos;,</div><div class="line">  data: {</div><div class="line">    message: &apos;Hello Vue!&apos;</div><div class="line">  }</div><div class="line">})</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello Vue!</div></pre></td></tr></table></figure>
-<p>我们已经生成了我们的第一个 Vue 应用！看起来这跟单单渲染一个字符串模板非常类似，但是 Vue.js 在背后做了大量工作。现在数据和 DOM 已经被绑定在一起，所有的元素都是响应式的。我们如何知道？打开你的浏览器的控制台，并修改 app.message，你将看到上例相应地更新。<br>除了绑定插入的文本内容，我们还可以采用这样的方式绑定 DOM 元素属性：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div id="app-2"&gt;</div><div class="line">  &lt;span v-bind:title="message"&gt;</div><div class="line">    Hover your mouse over me for a few seconds to see my dynamically bound title!</div><div class="line">  &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">var app2 = new Vue(&#123;</div><div class="line">  el: '#app-2',</div><div class="line">  data: &#123;</div><div class="line">    message: 'You loaded this page on ' + new Date()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x751F;&#x6210;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; Vue &#x5E94;&#x7528;&#xFF01;&#x770B;&#x8D77;&#x6765;&#x8FD9;&#x8DDF;&#x5355;&#x5355;&#x6E32;&#x67D3;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6A21;&#x677F;&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x662F; Vue.js &#x5728;&#x80CC;&#x540E;&#x505A;&#x4E86;&#x5927;&#x91CF;&#x5DE5;&#x4F5C;&#x3002;&#x73B0;&#x5728;&#x6570;&#x636E;&#x548C; DOM &#x5DF2;&#x7ECF;&#x88AB;&#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x90FD;&#x662F;&#x54CD;&#x5E94;&#x5F0F;&#x7684;&#x3002;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x77E5;&#x9053;&#xFF1F;&#x6253;&#x5F00;&#x4F60;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x5E76;&#x4FEE;&#x6539; app.message&#xFF0C;&#x4F60;&#x5C06;&#x770B;&#x5230;&#x4E0A;&#x4F8B;&#x76F8;&#x5E94;&#x5730;&#x66F4;&#x65B0;&#x3002;<br>&#x9664;&#x4E86;&#x7ED1;&#x5B9A;&#x63D2;&#x5165;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x8FD9;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x7ED1;&#x5B9A; DOM &#x5143;&#x7D20;&#x5C5E;&#x6027;&#xFF1A;<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app-2&quot;&gt;</div><div class="line">  &lt;span v-bind:title=&quot;message&quot;&gt;</div><div class="line">    Hover your mouse over me for a few seconds to see my dynamically bound title!</div><div class="line">  &lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">var app2 = new Vue({</div><div class="line">  el: &apos;#app-2&apos;,</div><div class="line">  data: {</div><div class="line">    message: &apos;You loaded this page on &apos; + new Date()</div><div class="line">  }</div><div class="line">})</div></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hover your mouse over me <span class="keyword">for</span> a few seconds to see my dynamically bound title!</div></pre></td></tr></table></figure>
-<p>这里我们遇到点新东西。你看到的 v-bind 属性被称为指令。指令带有前缀 v-，以表示它们是 Vue.js 提供的特殊属性。可能你已经猜到了，它们会在渲染过的 DOM 上应用特殊的响应式行为。这个指令的简单含义是说：将这个元素节点的 title 属性和 Vue 实例的 message 属性绑定到一起。<br>你再次打开浏览器的控制台输入 app2.message = ‘some new message’，你就会再一次看到这个绑定了title属性的HTML已经进行了更新。</p>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9047;&#x5230;&#x70B9;&#x65B0;&#x4E1C;&#x897F;&#x3002;&#x4F60;&#x770B;&#x5230;&#x7684; v-bind &#x5C5E;&#x6027;&#x88AB;&#x79F0;&#x4E3A;&#x6307;&#x4EE4;&#x3002;&#x6307;&#x4EE4;&#x5E26;&#x6709;&#x524D;&#x7F00; v-&#xFF0C;&#x4EE5;&#x8868;&#x793A;&#x5B83;&#x4EEC;&#x662F; Vue.js &#x63D0;&#x4F9B;&#x7684;&#x7279;&#x6B8A;&#x5C5E;&#x6027;&#x3002;&#x53EF;&#x80FD;&#x4F60;&#x5DF2;&#x7ECF;&#x731C;&#x5230;&#x4E86;&#xFF0C;&#x5B83;&#x4EEC;&#x4F1A;&#x5728;&#x6E32;&#x67D3;&#x8FC7;&#x7684; DOM &#x4E0A;&#x5E94;&#x7528;&#x7279;&#x6B8A;&#x7684;&#x54CD;&#x5E94;&#x5F0F;&#x884C;&#x4E3A;&#x3002;&#x8FD9;&#x4E2A;&#x6307;&#x4EE4;&#x7684;&#x7B80;&#x5355;&#x542B;&#x4E49;&#x662F;&#x8BF4;&#xFF1A;&#x5C06;&#x8FD9;&#x4E2A;&#x5143;&#x7D20;&#x8282;&#x70B9;&#x7684; title &#x5C5E;&#x6027;&#x548C; Vue &#x5B9E;&#x4F8B;&#x7684; message &#x5C5E;&#x6027;&#x7ED1;&#x5B9A;&#x5230;&#x4E00;&#x8D77;&#x3002;<br>&#x4F60;&#x518D;&#x6B21;&#x6253;&#x5F00;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x5165; app2.message = &#x2018;some new message&#x2019;&#xFF0C;&#x4F60;&#x5C31;&#x4F1A;&#x518D;&#x4E00;&#x6B21;&#x770B;&#x5230;&#x8FD9;&#x4E2A;&#x7ED1;&#x5B9A;&#x4E86;title&#x5C5E;&#x6027;&#x7684;HTML&#x5DF2;&#x7ECF;&#x8FDB;&#x884C;&#x4E86;&#x66F4;&#x65B0;&#x3002;</p>
 
       
     </div>
@@ -404,8 +404,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/21/2016-12-21styl/" rel="prev" title="Stylus Api">
-                Stylus Api <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/21/2016-12-21styl/" rel="prev" title="Stylus   入门介绍">
+                Stylus   入门介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -465,7 +465,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -482,7 +482,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -529,7 +529,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
