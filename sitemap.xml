@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://towards21.com/about/css/style.css</loc>
+    
+    <lastmod>2016-12-31T09:00:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://towards21.com/about/index.html</loc>
+    
+    <lastmod>2016-12-31T08:49:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://towards21.com/2016/12/21/2016-12-21styl/</loc>
     
     <lastmod>2016-12-21T15:27:17.000Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>http://towards21.com/tags/index.html</loc>
     
     <lastmod>2016-12-21T14:23:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://towards21.com/about/index.html</loc>
-    
-    <lastmod>2016-12-21T14:23:23.000Z</lastmod>
     
   </url>
   
