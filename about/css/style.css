@@ -95,8 +95,8 @@
 	z-index: -1
 }
 .spaceship .fins:before, .spaceship .fins:after {
-	content: &quot;&quot;;
-	position: absolute;
+	content:&quot; &quot;;
+	position:absolute;
 	border-color: rgba(255, 153, 145, 1);
 	height: 30px;
 	border-top: 140px solid transparent;
