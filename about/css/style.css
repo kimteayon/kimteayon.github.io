@@ -1,9 +1,4 @@
 *{margin:0;padding:0;list-style: none;}
-#img1{
-  background-image:url(&quot;css/1.png&quot;);
-  width: 300px;
-  height: 300px;
-}
 #animation {
 	animation: flight 3s ease-in-out 0s infinite alternate none;
 	-webkit-animation: flight 3s ease-in-out 0s infinite alternate none;
@@ -11,15 +6,9 @@
 	float: right;
 	height: 100%;
 	z-index: 100;
-	margin-top:-160px;
-	margin-right: 600px;
+	margin-top:300px;
+	margin-right: 400px;
 }
-@media screen and (max-width: 768px){
-  #animation {
-  display: none;
-  }
-}
-
 .spaceship {
 	position: absolute;
 	-webkit-transform: scale(0.76) rotate(45deg);
