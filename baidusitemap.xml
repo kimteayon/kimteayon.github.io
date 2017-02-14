@@ -4,11 +4,37 @@
 
     
   <url>
-    <loc>http://towards21.com/2017/02/01/2017-02-14d3demo/</loc>
-    <lastmod>2017-02-14T14:12:02.000Z</lastmod>
+    <loc>http://towards21.com/2017/02/01/2017-02-01d3demo/</loc>
+    <lastmod>2017-02-14T14:14:17.000Z</lastmod>
     <data>
         <display>
-        <title>2017-02-01d3demo</title>
+        <title>力向导图topo实例</title>
+        <pubTime>2017-02-01T15:37:33.000Z</pubTime>
+        
+        <tag>d3</tag>
+         
+        <tag>demo</tag>
+         
+        <tag>力向导图</tag>
+         
+        <tag>topo</tag>
+         
+         
+           
+             
+              <breadCrumb title="d3Demo" url="http://towards21.com/categories/d3Demo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://towards21.com/2017/02/01/2017-02-14d3demo/</loc>
+    <lastmod>2017-02-14T14:14:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>曲线坐标图</title>
         <pubTime>2017-02-01T15:37:33.000Z</pubTime>
         
         <tag>d3</tag>
@@ -43,32 +69,6 @@
            
              
               <breadCrumb title="d3.js" url="http://towards21.com/categories/d3-js/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://towards21.com/2017/02/01/2017-02-01d3demo/</loc>
-    <lastmod>2017-02-01T16:19:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>2017-02-01d3demo</title>
-        <pubTime>2017-02-01T15:37:33.000Z</pubTime>
-        
-        <tag>d3</tag>
-         
-        <tag>demo</tag>
-         
-        <tag>力向导图</tag>
-         
-        <tag>topo</tag>
-         
-         
-           
-             
-              <breadCrumb title="d3Demo" url="http://towards21.com/categories/d3Demo/"/>
           
         </display>
     </data>
