@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://towards21.com/2017/02/19/2017-2-19demo/</loc>
+    <lastmod>2017-02-19T15:09:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>动态图表</title>
+        <pubTime>2017-02-19T13:45:20.000Z</pubTime>
+        
+        <tag>d3</tag>
+         
+        <tag>demo</tag>
+         
+        <tag>过渡</tag>
+         
+         
+           
+             
+              <breadCrumb title="d3Demo" url="http://towards21.com/categories/d3Demo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://towards21.com/2017/02/19/2017-2-19/</loc>
+    <lastmod>2017-02-19T14:47:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>d3过渡</title>
+        <pubTime>2017-02-19T13:45:20.000Z</pubTime>
+        
+        <tag>d3基础</tag>
+         
+         
+           
+             
+              <breadCrumb title="d3.js" url="http://towards21.com/categories/d3-js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://towards21.com/2017/02/17/2017-2-17/</loc>
     <lastmod>2017-02-17T16:15:28.000Z</lastmod>
     <data>

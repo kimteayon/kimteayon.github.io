@@ -1,0 +1,683 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="d3基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="5" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x52A8;&amp;#x6001;&amp;#x6548;&amp;#x679C;&amp;#xFF0C;&amp;#x5728; D3 &amp;#x91CC;&amp;#x6211;&amp;#x4EEC;&amp;#x79F0;&amp;#x4E4B;&amp;#x4E3A;&amp;#x8FC7;&amp;#x6E21;&amp;#xFF08;transition&amp;#xFF09;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="d3过渡">
+<meta property="og:url" content="http://towards21.com/2017/02/19/2017-2-19/index.html">
+<meta property="og:site_name" content="5">
+<meta property="og:description" content="&amp;#x52A8;&amp;#x6001;&amp;#x6548;&amp;#x679C;&amp;#xFF0C;&amp;#x5728; D3 &amp;#x91CC;&amp;#x6211;&amp;#x4EEC;&amp;#x79F0;&amp;#x4E4B;&amp;#x4E3A;&amp;#x8FC7;&amp;#x6E21;&amp;#xFF08;transition&amp;#xFF09;&amp;#x3002;">
+<meta property="og:updated_time" content="2017-02-19T14:47:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="d3过渡">
+<meta name="twitter:description" content="&amp;#x52A8;&amp;#x6001;&amp;#x6548;&amp;#x679C;&amp;#xFF0C;&amp;#x5728; D3 &amp;#x91CC;&amp;#x6211;&amp;#x4EEC;&amp;#x79F0;&amp;#x4E4B;&amp;#x4E3A;&amp;#x8FC7;&amp;#x6E21;&amp;#xFF08;transition&amp;#xFF09;&amp;#x3002;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://towards21.com/2017/02/19/2017-2-19/"/>
+
+
+
+
+
+  <title> d3过渡 | 5 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+   <div class = "gird" >
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">5</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+    
+      <p class="site-subtitle">做一个有趣的人</p>
+    
+  </div>
+
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+  </div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://towards21.com/2017/02/19/2017-2-19/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="吃饼干的怪兽">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="5">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="5" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                d3过渡
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-19T21:45:20+08:00">
+                2017-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/d3-js/" itemprop="url" rel="index">
+                    <span itemprop="name">d3.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x52A8;&#x6001;&#x6548;&#x679C;&#xFF0C;&#x5728; D3 &#x91CC;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;&#x8FC7;&#x6E21;&#xFF08;transition&#xFF09;&#x3002;<br><a id="more"></a><br>D3 &#x63D0;&#x4F9B;&#x4E86; 4 &#x4E2A;&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x56FE;&#x5F62;&#x7684;&#x8FC7;&#x6E21;&#xFF1A;&#x4ECE;&#x72B6;&#x6001; A &#x53D8;&#x4E3A;&#x72B6;&#x6001; B&#x3002;</p>
+<h1 id="transition"><a href="#transition" class="headerlink" title="transition()"></a>transition()</h1><p>&#x542F;&#x52A8;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;<br>&#x5176;&#x524D;&#x540E;&#x662F;&#x56FE;&#x5F62;&#x53D8;&#x5316;&#x524D;&#x540E;&#x7684;&#x72B6;&#x6001;&#xFF08;&#x5F62;&#x72B6;&#x3001;&#x4F4D;&#x7F6E;&#x3001;&#x989C;&#x8272;&#x7B49;&#x7B49;&#xFF09;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.attr(<span class="string">&quot;fill&quot;</span>,<span class="string">&quot;red&quot;</span>)         <span class="comment">//&#x521D;&#x59CB;&#x989C;&#x8272;&#x4E3A;&#x7EA2;&#x8272;</span></div><div class="line">.transition()               <span class="comment">//&#x542F;&#x52A8;&#x8FC7;&#x6E21;</span></div><div class="line">.attr(<span class="string">&quot;fill&quot;</span>,<span class="string">&quot;steelblue&quot;</span>)   <span class="comment">//&#x7EC8;&#x6B62;&#x989C;&#x8272;&#x4E3A;&#x94C1;&#x84DD;&#x8272;</span></div></pre></td></tr></table></figure></p>
+<p>D3 &#x4F1A;&#x81EA;&#x52A8;&#x5BF9;&#x4E24;&#x79CD;&#x989C;&#x8272;&#xFF08;&#x7EA2;&#x8272;&#x548C;&#x94C1;&#x84DD;&#x8272;&#xFF09;&#x4E4B;&#x95F4;&#x7684;&#x989C;&#x8272;&#x503C;&#xFF08;RGB&#x503C;&#xFF09;&#x8FDB;&#x884C;&#x63D2;&#x503C;&#x8BA1;&#x7B97;&#xFF0C;&#x5F97;&#x5230;&#x8FC7;&#x6E21;&#x7528;&#x7684;&#x989C;&#x8272;&#x503C;&#x3002;&#x6211;&#x4EEC;&#x65E0;&#x9700;&#x77E5;&#x9053;&#x4E2D;&#x95F4;&#x662F;&#x600E;&#x4E48;&#x8BA1;&#x7B97;&#x7684;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4EAB;&#x53D7;&#x7ED3;&#x679C;&#x5373;&#x53EF;&#x3002;</p>
+<h1 id="duration"><a href="#duration" class="headerlink" title="duration()"></a>duration()</h1><p>&#x6307;&#x5B9A;&#x8FC7;&#x6E21;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x4E3A;&#x6BEB;&#x79D2;&#x3002;</p>
+<p>&#x5982; <code>duration(2000)</code> &#xFF0C;&#x6307;&#x6301;&#x7EED; 2000 &#x6BEB;&#x79D2;&#xFF0C;&#x5373; 2 &#x79D2;&#x3002;</p>
+<h1 id="ease"><a href="#ease" class="headerlink" title="ease()"></a>ease()</h1><p>&#x6307;&#x5B9A;&#x8FC7;&#x6E21;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5E38;&#x7528;&#x7684;&#x6709;&#xFF1A;<br><code>&#x7F13;&#x52A8;&#x51FD;&#x6570;</code><br>linear&#xFF1A;&#x666E;&#x901A;&#x7684;&#x7EBF;&#x6027;&#x53D8;&#x5316;<br>circle&#xFF1A;&#x6162;&#x6162;&#x5730;&#x5230;&#x8FBE;&#x53D8;&#x6362;&#x7684;&#x6700;&#x7EC8;&#x72B6;&#x6001;<br>elastic&#xFF1A;&#x5E26;&#x6709;&#x5F39;&#x8DF3;&#x7684;&#x5230;&#x8FBE;&#x6700;&#x7EC8;&#x72B6;&#x6001;<br>bounce&#xFF1A;&#x5728;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#x5904;&#x5F39;&#x8DF3;&#x51E0;&#x6B21;</p>
+<p>&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x683C;&#x5F0F;&#x5F62;&#x5982;&#xFF1A; <code>ease(&#x201C;bounce&#x201D;)&#x3002;</code></p>
+<p>delay()</p>
+<p>&#x6307;&#x5B9A;&#x5EF6;&#x8FDF;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x8868;&#x793A;&#x4E00;&#x5B9A;&#x65F6;&#x95F4;&#x540E;&#x624D;&#x5F00;&#x59CB;&#x8F6C;&#x53D8;&#xFF0C;&#x5355;&#x4F4D;&#x540C;&#x6837;&#x4E3A;&#x6BEB;&#x79D2;&#x3002;&#x6B64;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x5BF9;&#x6574;&#x4F53;&#x6307;&#x5B9A;&#x5EF6;&#x8FDF;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5BF9;&#x4E2A;&#x522B;&#x6307;&#x5B9A;&#x5EF6;&#x8FDF;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x5BF9;&#x6574;&#x4F53;&#x6307;&#x5B9A;&#x65F6;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.transition()</div><div class="line">.duration(1000)</div><div class="line">.delay(500)</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x6B64;&#xFF0C;&#x56FE;&#x5F62;&#x6574;&#x4F53;&#x5728;&#x5EF6;&#x8FDF; 500 &#x6BEB;&#x79D2;&#x540E;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x53D8;&#x5316;&#x7684;&#x65F6;&#x957F;&#x4E3A; 1000 &#x6BEB;&#x79D2;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x8FC7;&#x6E21;&#x7684;&#x603B;&#x65F6;&#x957F;&#x4E3A;1500&#x6BEB;&#x79D2;&#x3002;<br>&#x53C8;&#x5982;&#xFF0C;&#x5BF9;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;&#x7684;&#x56FE;&#x5F62;&#xFF08;&#x56FE;&#x5F62;&#x4E0A;&#x7ED1;&#x5B9A;&#x4E86;&#x6570;&#x636E;&#xFF09;&#x8FDB;&#x884C;&#x6307;&#x5B9A;&#x65F6;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.transition()</div><div class="line">.duration(<span class="number">1000</span>)</div><div class="line">.delay(funtion(d,i){</div><div class="line">    <span class="keyword">return</span> <span class="number">200</span>*i;</div><div class="line">})</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x6B64;&#xFF0C;&#x5047;&#x8BBE;&#x6709; 10 &#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C; 1 &#x4E2A;&#x5143;&#x7D20;&#x5EF6;&#x8FDF; 0 &#x6BEB;&#x79D2;&#xFF08;&#x56E0;&#x4E3A; i = 0&#xFF09;&#xFF0C;&#x7B2C; 2 &#x4E2A;&#x5143;&#x7D20;&#x5EF6;&#x8FDF; 200 &#x6BEB;&#x79D2;&#xFF0C;&#x7B2C; 3 &#x4E2A;&#x5EF6;&#x8FDF; 400 &#x6BEB;&#x79D2;&#xFF0C;&#x4F9D;&#x6B21;&#x7C7B;&#x63A8;&#x2026;.&#x6574;&#x4E2A;&#x8FC7;&#x6E21;&#x7684;&#x957F;&#x5EA6;&#x4E3A; 200 * 9 + 1000 = 2800 &#x6BEB;&#x79D2;&#x3002;</p>
+<h1 id="&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x7684;&#x52A8;&#x6001;&#x6548;&#x679C;"><a href="#&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x7684;&#x52A8;&#x6001;&#x6548;&#x679C;" class="headerlink" title="&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x7684;&#x52A8;&#x6001;&#x6548;&#x679C;"></a>&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x7684;&#x52A8;&#x6001;&#x6548;&#x679C;</h1><p>&#x4E0B;&#x9762;&#x5C06;&#x5728; SVG &#x753B;&#x5E03;&#x91CC;&#x6DFB;&#x52A0;&#x4E09;&#x4E2A;&#x5706;&#xFF0C;&#x5706;&#x51FA;&#x73B0;&#x4E4B;&#x540E;&#xFF0C;&#x7ACB;&#x5373;&#x542F;&#x52A8;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;</p>
+<p>&#x7B2C;&#x4E00;&#x4E2A;&#x5706;&#xFF0C;&#x8981;&#x6C42;&#x79FB;&#x52A8; x &#x5750;&#x6807;&#x3002;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> circle1 = svg.append(<span class="string">&quot;circle&quot;</span>)</div><div class="line">        .attr(<span class="string">&quot;cx&quot;</span>, <span class="number">100</span>)</div><div class="line">        .attr(<span class="string">&quot;cy&quot;</span>, <span class="number">100</span>)</div><div class="line">        .attr(<span class="string">&quot;r&quot;</span>, <span class="number">45</span>)</div><div class="line">        .style(<span class="string">&quot;fill&quot;</span>,<span class="string">&quot;green&quot;</span>);</div><div class="line">        <span class="comment">//&#x5728;1&#x79D2;&#xFF08;1000&#x6BEB;&#x79D2;&#xFF09;&#x5185;&#x5C06;&#x5706;&#x5FC3;&#x5750;&#x6807;&#x7531;100&#x53D8;&#x4E3A;300</span></div><div class="line">        circle1.transition()</div><div class="line">         .duration(<span class="number">1000</span>)</div><div class="line">         .attr(<span class="string">&quot;cx&quot;</span>, <span class="number">300</span>);</div></pre></td></tr></table></figure></p>
+<p>&#x7B2C;&#x4E8C;&#x4E2A;&#x5706;&#xFF0C;&#x8981;&#x6C42;&#x65E2;&#x79FB;&#x52A8; x &#x5750;&#x6807;&#xFF0C;&#x53C8;&#x6539;&#x53D8;&#x989C;&#x8272;&#x3002;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> circle2 = svg.append(<span class="string">&quot;circle&quot;</span>)... <span class="comment">//&#x4E0E;&#x7B2C;&#x4E00;&#x4E2A;&#x5706;&#x4E00;&#x6837;&#xFF0C;&#x7701;&#x7565;&#x90E8;&#x5206;&#x4EE3;&#x7801;</span></div><div class="line"> <span class="comment">//&#x5728;1.5&#x79D2;&#xFF08;1500&#x6BEB;&#x79D2;&#xFF09;&#x5185;&#x5C06;&#x5706;&#x5FC3;&#x5750;&#x6807;&#x7531;100&#x53D8;&#x4E3A;300&#xFF0C;</span></div><div class="line"><span class="comment">//&#x5C06;&#x989C;&#x8272;&#x4ECE;&#x7EFF;&#x8272;&#x53D8;&#x4E3A;&#x7EA2;&#x8272;</span></div><div class="line">circle2.transition()</div><div class="line">    .duration(<span class="number">1500</span>)</div><div class="line">    .attr(<span class="string">&quot;cx&quot;</span>, <span class="number">300</span>)</div><div class="line">    .style(<span class="string">&quot;fill&quot;</span>,<span class="string">&quot;red&quot;</span>);</div></pre></td></tr></table></figure></p>
+<p>&#x7B2C;&#x4E09;&#x4E2A;&#x5706;&#xFF0C;&#x8981;&#x6C42;&#x65E2;&#x79FB;&#x52A8; x &#x5750;&#x6807;&#xFF0C;&#x53C8;&#x6539;&#x53D8;&#x989C;&#x8272;&#xFF0C;&#x8FD8;&#x6539;&#x53D8;&#x534A;&#x5F84;&#x3002;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> circle3 = svg.append(<span class="string">&quot;circle&quot;</span>)... <span class="comment">//&#x4E0E;&#x7B2C;&#x4E00;&#x4E2A;&#x5706;&#x4E00;&#x6837;&#xFF0C;&#x7701;&#x7565;&#x90E8;&#x5206;&#x4EE3;&#x7801;</span></div><div class="line"> </div><div class="line"><span class="comment">//&#x5728;2&#x79D2;&#xFF08;2000&#x6BEB;&#x79D2;&#xFF09;&#x5185;&#x5C06;&#x5706;&#x5FC3;&#x5750;&#x6807;&#x7531;100&#x53D8;&#x4E3A;300</span></div><div class="line"><span class="comment">//&#x5C06;&#x989C;&#x8272;&#x4ECE;&#x7EFF;&#x8272;&#x53D8;&#x4E3A;&#x7EA2;&#x8272;</span></div><div class="line"><span class="comment">//&#x5C06;&#x534A;&#x5F84;&#x4ECE;45&#x53D8;&#x6210;25</span></div><div class="line"><span class="comment">//&#x8FC7;&#x6E21;&#x65B9;&#x5F0F;&#x91C7;&#x7528;bounce&#xFF08;&#x5728;&#x7EC8;&#x70B9;&#x5904;&#x5F39;&#x8DF3;&#x51E0;&#x6B21;&#xFF09;</span></div><div class="line">circle3.transition()</div><div class="line">    .duration(<span class="number">2000</span>)</div><div class="line">    .ease(<span class="string">&quot;bounce&quot;</span>)</div><div class="line">    .attr(<span class="string">&quot;cx&quot;</span>, <span class="number">300</span>)</div><div class="line">    .style(<span class="string">&quot;fill&quot;</span>,<span class="string">&quot;red&quot;</span>)</div><div class="line">    .attr(<span class="string">&quot;r&quot;</span>, <span class="number">25</span>);</div></pre></td></tr></table></figure></p>
+<p><a href="http://jsbin.com/vegicuwepa/edit?html,js,output" target="_blank" rel="external">&#x5728;&#x7EBF;&#x6F14;&#x793A;</a></p>
+<h1 id="&#x7ED9;&#x67F1;&#x5F62;&#x56FE;&#x52A0;&#x4E0A;&#x52A8;&#x6001;&#x6548;&#x679C;"><a href="#&#x7ED9;&#x67F1;&#x5F62;&#x56FE;&#x52A0;&#x4E0A;&#x52A8;&#x6001;&#x6548;&#x679C;" class="headerlink" title="&#x7ED9;&#x67F1;&#x5F62;&#x56FE;&#x52A0;&#x4E0A;&#x52A8;&#x6001;&#x6548;&#x679C;"></a>&#x7ED9;&#x67F1;&#x5F62;&#x56FE;&#x52A0;&#x4E0A;&#x52A8;&#x6001;&#x6548;&#x679C;</h1><p>&#x5728;&#x4E0A;&#x4E00;&#x7AE0;&#x5B8C;&#x6574;&#x67F1;&#x5F62;&#x56FE;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x7A0D;&#x4F5C;&#x4FEE;&#x6539;&#xFF0C;&#x5373;&#x53EF;&#x505A;&#x6210;&#x4E00;&#x4E2A;&#x5E26;&#x52A8;&#x6001;&#x6548;&#x679C;&#x7684;&#x3001;&#x6709;&#x610F;&#x601D;&#x7684;&#x67F1;&#x5F62;&#x56FE;&#x3002;</p>
+<p>&#x5728;&#x6DFB;&#x52A0;&#x6587;&#x5B57;&#x5143;&#x7D20;&#x548C;&#x77E9;&#x5F62;&#x5143;&#x7D20;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x542F;&#x52A8;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#xFF0C;&#x8BA9;&#x5404;&#x67F1;&#x5F62;&#x548C;&#x6587;&#x5B57;&#x7F13;&#x6162;&#x5347;&#x81F3;&#x76EE;&#x6807;&#x9AD8;&#x5EA6;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x76EE;&#x6807;&#x5904;&#x8DF3;&#x52A8;&#x51E0;&#x6B21;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x6587;&#x5B57;&#x5143;&#x7D20;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.attr(<span class="string">&quot;y&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>{</div><div class="line">    <span class="keyword">var</span> min = yScale.domain()[<span class="number">0</span>];</div><div class="line">    <span class="keyword">return</span> yScale(min);</div><div class="line">})</div><div class="line">.transition()</div><div class="line">.delay(<span class="function"><span class="keyword">function</span>(<span class="params">d,i</span>)</span>{</div><div class="line">    <span class="keyword">return</span> i * <span class="number">200</span>;</div><div class="line">})</div><div class="line">.duration(<span class="number">2000</span>)</div><div class="line">.ease(<span class="string">&quot;bounce&quot;</span>)</div><div class="line">.attr(<span class="string">&quot;y&quot;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>{</div><div class="line">    <span class="keyword">return</span> yScale(d);</div><div class="line">});</div></pre></td></tr></table></figure></p>
+<p>&#x6587;&#x5B57;&#x5143;&#x7D20;&#x7684;&#x8FC7;&#x6E21;&#x524D;&#x540E;&#xFF0C;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x7684;&#x662F; y &#x5750;&#x6807;&#x3002;&#x5176;&#x8D77;&#x59CB;&#x72B6;&#x6001;&#x662F;&#x5728; y &#x8F74;&#x7B49;&#x4E8E; 0 &#x7684;&#x4F4D;&#x7F6E;&#xFF08;&#x4F46;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x4E0D;&#x80FD;&#x5728;&#x8D77;&#x59CB;&#x72B6;&#x6001;&#x76F4;&#x63A5;&#x8FD4;&#x56DE; 0&#xFF0C;&#x8981;&#x5E94;&#x7528;&#x6BD4;&#x4F8B;&#x5C3A;&#x8BA1;&#x7B97;&#x753B;&#x5E03;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#xFF09;&#x3002;&#x7EC8;&#x6B62;&#x72B6;&#x6001;&#x662F;&#x76EE;&#x6807;&#x503C;&#x3002;<br><a href="http://jsbin.com/govuxufada/edit?html,js,output" target="_blank" rel="external">&#x5728;&#x7EBF;&#x6F14;&#x793A;</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/d3基础/" rel="tag"># d3基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/17/2017-2-17/" rel="next" title="完整的柱形图">
+                <i class="fa fa-chevron-left"></i> 完整的柱形图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/19/2017-2-19demo/" rel="prev" title="动态图表">
+                动态图表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="吃饼干的怪兽" />
+          <p class="site-author-name" itemprop="name">吃饼干的怪兽</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transition"><span class="nav-number">1.</span> <span class="nav-text">transition()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#duration"><span class="nav-number">2.</span> <span class="nav-text">duration()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ease"><span class="nav-number">3.</span> <span class="nav-text">ease()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现简单的动态效果"><span class="nav-number">4.</span> <span class="nav-text">实现简单的动态效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#给柱形图加上动态效果"><span class="nav-number">5.</span> <span class="nav-text">给柱形图加上动态效果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吃饼干的怪兽</span>
+</div>
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
