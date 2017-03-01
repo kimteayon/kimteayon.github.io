@@ -357,7 +357,7 @@
       
         <p>transform&#x7684;&#x539F;&#x7406;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x56FE;&#x5F62;&#x5B66;&#x4E2D;&#x7684;2D&#x77E9;&#x9635;&#x53D8;&#x6362;&#xFF0C;</p>
 <a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;g transform=<span class="string">&quot;...&quot;</span>&gt;  &lt;!--other elements&gt;  ...&lt;/g&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;g transform=<span class="string">&quot;...&quot;</span>&gt;  <span class="xml"><span class="comment">&lt;!--other elements&gt;  ...&lt;/g&gt;</span></span></div></pre></td></tr></table></figure>
 <h1 id="&#x5E73;&#x79FB;&#x53D8;&#x6362;&#xFF08;translate&#xFF09;"><a href="#&#x5E73;&#x79FB;&#x53D8;&#x6362;&#xFF08;translate&#xFF09;" class="headerlink" title="&#x5E73;&#x79FB;&#x53D8;&#x6362;&#xFF08;translate&#xFF09;"></a>&#x5E73;&#x79FB;&#x53D8;&#x6362;&#xFF08;translate&#xFF09;</h1><p>&#x5E73;&#x79FB;&#x8868;&#x8FBE;&#x5F0F;<code>transform=&quot;translate(x,y)&quot;</code>&#xFF0C;&#x5373;&#x65B0;&#x5750;&#x6807;&#x7CFB;&#x7684;&#x539F;&#x70B9;&#x5728;&#x539F;&#x5750;&#x6807;&#x7CFB;&#x7684;&#xFF08;x,y&#xFF09;&#x5904;&#x3002;&#x5750;&#x6807;&#x8F74;&#x7684;&#x65B9;&#x5411;&#x4E0D;&#x53D8;&#x3002;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">|<span class="number">1</span>  <span class="number">0</span>  tx|  |x|</div><div class="line">|<span class="number">0</span>  <span class="number">1</span>  ty|  |y| = |x + tx  y+ty  <span class="number">1</span>|</div><div class="line">|<span class="number">0</span>  <span class="number">0</span>   <span class="number">1</span>|  |<span class="number">1</span>|</div></pre></td></tr></table></figure></p>
 <h1 id="&#x65CB;&#x8F6C;&#x53D8;&#x6362;&#xFF08;rotate&#xFF09;"><a href="#&#x65CB;&#x8F6C;&#x53D8;&#x6362;&#xFF08;rotate&#xFF09;" class="headerlink" title="&#x65CB;&#x8F6C;&#x53D8;&#x6362;&#xFF08;rotate&#xFF09;"></a>&#x65CB;&#x8F6C;&#x53D8;&#x6362;&#xFF08;rotate&#xFF09;</h1><p>transform=&#x201D;rotate(angle cx,cy)&#x201D;&#x3002;angle&#x4EE3;&#x8868;&#x65CB;&#x8F6C;&#x89D2;&#x5EA6;&#xFF0C;&#x7F3A;&#x7701;&#x5355;&#x4F4D;&#x662F;&#x201C;&#x5EA6;&#x201D;&#xFF0C;&#x77AC;&#x65F6;&#x9488;&#x4E3A;&#x6B63;&#xFF0C;&#x9006;&#x65F6;&#x9488;&#x4E3A;&#x8D1F;&#x3002;&#xFF08;cx,cy&#xFF09;&#x662F;&#x65CB;&#x8F6C;&#x4E2D;&#x5FC3;&#x6240;&#x5728;&#x7684;&#x5750;&#x6807;&#x3002;&#x82E5;&#x7701;&#x7565;&#x65CB;&#x8F6C;&#x4E2D;&#x5FC3;&#x5750;&#x6807;&#xFF0C;&#x5219;&#x7F3A;&#x7701;&#x503C;&#x662F;&#xFF08;0,0&#xFF09;//&#x5750;&#x6807;&#x7CFB;&#x7EDF;&#x539F;&#x70B9;</p>
 <h1 id="&#x4F38;&#x7F29;&#x53D8;&#x6362;&#xFF08;scale&#xFF09;"><a href="#&#x4F38;&#x7F29;&#x53D8;&#x6362;&#xFF08;scale&#xFF09;" class="headerlink" title="&#x4F38;&#x7F29;&#x53D8;&#x6362;&#xFF08;scale&#xFF09;"></a>&#x4F38;&#x7F29;&#x53D8;&#x6362;&#xFF08;scale&#xFF09;</h1><p>transform=&#x201D;scale(sx,sy)&#x201D;&#xFF0C;sx,sy&#x5206;&#x522B;&#x4EE3;&#x8868;x&#x8F74;&#x65B9;&#x5411;&#x548C;y&#x65B9;&#x5411;&#x62C9;&#x4F38;&#x6216;&#x7F29;&#x5C0F;&#x7684;&#x6BD4;&#x4F8B;&#x56E0;&#x5B50;&#x3002;&#x62C9;&#x4F38;&#xFF1A;&#x5927;&#x4E8E;1&#xFF1B;&#x7F29;&#x5C0F;&#xFF1A;&#x5C0F;&#x4E8E;1&#x3002;&#x82E5;&#x7701;&#x7565;sy&#xFF0C;&#x5373;sy=sx&#xFF0C;&#x4F5C;&#x7B49;&#x6BD4;&#x4F8B;&#x7F29;&#x653E;&#x3002;//&#x82E5;&#x9700;&#x8981;&#x6574;&#x7406;&#x7F29;&#x653E;&#x4F7F;&#x7528;svg viewBox</p>
@@ -475,7 +475,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -492,7 +492,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
