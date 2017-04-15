@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="d3基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="5" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4E00;&amp;#x4E2A;&amp;#x9009;&amp;#x62E9;&amp;#x5C31;&amp;#x662F;&amp;#x4ECE;&amp;#x5F53;&amp;#x524D;&amp;#x6587;&amp;#x6863;&amp;#x4E2D;&amp;#x62BD;&amp;#x53D6;&amp;#x7684;&amp;#x4E00;&amp;#x7EC4;&amp;#x5143;&amp;#x7D20;&amp;#x3002;D3&amp;#x4F7F;&amp;#x7528;CSS3&amp;#x6765;&amp;#x9009;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="d3选择器详解">
+<meta property="og:url" content="http://towards21.com/2017/04/15/2017-4-15/index.html">
+<meta property="og:site_name" content="5">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x4E2A;&amp;#x9009;&amp;#x62E9;&amp;#x5C31;&amp;#x662F;&amp;#x4ECE;&amp;#x5F53;&amp;#x524D;&amp;#x6587;&amp;#x6863;&amp;#x4E2D;&amp;#x62BD;&amp;#x53D6;&amp;#x7684;&amp;#x4E00;&amp;#x7EC4;&amp;#x5143;&amp;#x7D20;&amp;#x3002;D3&amp;#x4F7F;&amp;#x7528;CSS3&amp;#x6765;&amp;#x9009;&amp;#">
+<meta property="og:updated_time" content="2017-04-15T14:57:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="d3选择器详解">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x4E2A;&amp;#x9009;&amp;#x62E9;&amp;#x5C31;&amp;#x662F;&amp;#x4ECE;&amp;#x5F53;&amp;#x524D;&amp;#x6587;&amp;#x6863;&amp;#x4E2D;&amp;#x62BD;&amp;#x53D6;&amp;#x7684;&amp;#x4E00;&amp;#x7EC4;&amp;#x5143;&amp;#x7D20;&amp;#x3002;D3&amp;#x4F7F;&amp;#x7528;CSS3&amp;#x6765;&amp;#x9009;&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://towards21.com/2017/04/15/2017-4-15/"/>
+
+
+
+
+
+  <title> d3选择器详解 | 5 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+   <div class = "gird" >
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">5</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+    
+      <p class="site-subtitle">做一个有趣的人</p>
+    
+  </div>
+
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+  </div>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://towards21.com/2017/04/15/2017-4-15/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="吃饼干的怪兽">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="5">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="5" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                d3选择器详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T22:14:55+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/d3-js/" itemprop="url" rel="index">
+                    <span itemprop="name">d3.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x5C31;&#x662F;&#x4ECE;&#x5F53;&#x524D;&#x6587;&#x6863;&#x4E2D;&#x62BD;&#x53D6;&#x7684;&#x4E00;&#x7EC4;&#x5143;&#x7D20;&#x3002;D3&#x4F7F;&#x7528;CSS3&#x6765;&#x9009;&#x62E9;&#x9875;&#x9762;&#x5143;&#x7D20;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684;&#x9009;&#x62E9;&#x65B9;&#x5F0F;&#x6709;&#x6807;&#x7B7E; (&#x201C;div&#x201D;)&#x3001;&#x7C7B;(&#x201C;.awesome&#x201D;)&#x3001;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x7B26;(&#x201C;#foo&#x201D;)&#x3001;&#x5C5E;&#x6027;(&#x201C;[color=red]&#x201D;)&#x3001;&#x6216;&#x8005;&#x5305;&#x542B;(&#x201C;parent child&#x201D;)&#x3002;&#x9009;&#x62E9;&#x5668;&#x53EF;&#x4EE5;&#x662F;&#x4EA4;&#x53C9;(&#x201C;.this.that&#x201D; &#x8868;&#x793A;&#x903B;&#x8F91;&#x4E0E;)&#x7684;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x8054;&#x5408;&#x7684;(&#x201C;.this, .that&#x201D; &#x8868;&#x793A;&#x903B;&#x8F91;&#x6216;)&#x3002;&#x5982;&#x679C;&#x4F60;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x4E0D;&#x652F;&#x6301;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;D3&#x524D;&#x5305;&#x542B;Sizzle&#x6765;&#x652F;&#x6301;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x3002;</p>
+<p>&#x5F53;&#x9009;&#x62E9;&#x5B8C;&#x5143;&#x7D20;&#x4E4B;&#x540E;&#x4F60;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x6216;&#x8005;&#x83B7;&#x53D6;&#x5C5E;&#x6027;&#x3001;&#x6837;&#x5F0F;&#x3001;&#x7279;&#x6027;&#x3001;&#x9009;&#x62E9;&#x5668;&#x548C;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x3002;&#x5C5E;&#x6027;&#x503C;&#x7B49;&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x5E38;&#x91CF;&#x6216;&#x8005;&#x51FD;&#x6570;&#xFF1B;&#x540E;&#x8005;&#x4E3A;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x6C42;&#x503C;&#x3002;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4E3A;&#x6570;&#x636E;&#x9009;&#x62E9;&#x5668;&#x52A0;&#x5165;&#x5230;data&#x64CD;&#x4F5C;&#xFF1B;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x505A;&#x6570;&#x636E;&#x9A71;&#x52A8;&#x7684;&#x53D8;&#x6362;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x52A0;&#x4E0A;&#x6570;&#x636E;&#x4EA7;&#x751F;enter&#x548C;exit&#x5B50;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;add&#x548C;remove&#x5143;&#x7D20;&#x6765;&#x54CD;&#x5E94;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x6539;&#x53D8;&#x3002;</p>
+<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x5728;D3&#x4E2D;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;for&#x5FAA;&#x73AF;&#x540E;&#x8005;&#x9012;&#x5F52;&#x6765;&#x4FEE;&#x6539;&#x6587;&#x6863;&#x3002;&#x56E0;&#x4E3A;&#x4F60;&#x53EF;&#x4EE5;&#x4E00;&#x6B21;&#x64CD;&#x4F5C;&#x8FD9;&#x4E2A;&#x9009;&#x62E9;&#x5668;&#x800C;&#x4E0D;&#x662F;&#x904D;&#x5386;&#x5404;&#x4E2A;&#x5143;&#x7D20;&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x624B;&#x52A8;&#x5730;&#x904D;&#x5386;&#x5404;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;each&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x8C03;&#x7528;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x9009;&#x62E9;&#x5668;&#x7684;&#x7ED3;&#x679C;&#x662F;&#x6570;&#x7EC4;&#xFF0C;&#x6240;&#x4EE5;&#x5143;&#x7D20;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;(&#x4F8B;&#x5982;selection[0][0])&#x3002;&#x4E3A;&#x4E86;&#x7B80;&#x4FBF;D3&#x652F;&#x6301;&#x65B9;&#x6CD5;&#x94FE;&#xFF1A;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x5668;&#x3002;<br><a id="more"></a></p>
+<h1 id="&#x9009;&#x62E9;&#x5143;&#x7D20;"><a href="#&#x9009;&#x62E9;&#x5143;&#x7D20;" class="headerlink" title="&#x9009;&#x62E9;&#x5143;&#x7D20;"></a>&#x9009;&#x62E9;&#x5143;&#x7D20;</h1><p>D3&#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x79CD;&#x9AD8;&#x7EA7;&#x65B9;&#x6CD5;&#x6765;&#x9009;&#x62E9;&#x5143;&#x7D20;&#xFF1A;select&#x548C;selectAll&#x3002;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x63A5;&#x6536;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x524D;&#x8005;&#x53EA;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x540E;&#x8005;&#x9009;&#x62E9;&#x5728;&#x6587;&#x6863;&#x904D;&#x5386;&#x6B21;&#x5E8F;&#x4E2D;&#x6240;&#x6709;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E5F;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x8282;&#x70B9;&#xFF0C;&#x8FD9;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x548C;&#x7B2C;&#x4E09;&#x65B9;&#x5E93;&#x4F8B;&#x5982;jQuery&#x6216;&#x8005;&#x5F00;&#x53D1;&#x5DE5;&#x5177;($0)&#x6574;&#x5408;&#x3002;</p>
+<h2 id="d3-select-selector"><a href="#d3-select-selector" class="headerlink" title="d3.select(selector)"></a>d3.select(selector)</h2><p>&#x9009;&#x4E2D;&#x4E0E;&#x6307;&#x5B9A;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x7B26;&#x4E32;&#x5339;&#x914D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x8FD4;&#x56DE;&#x5355;&#x5143;&#x7D20;&#x9009;&#x62E9;&#x7ED3;&#x679C;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;&#x6587;&#x6863;&#x4E2D;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x5219;&#x8FD4;&#x56DE;&#x7A7A;&#x7684;&#x9009;&#x62E9;&#x3002;&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x5143;&#x7D20;&#x88AB;&#x9009;&#x4E2D;&#xFF0C;&#x53EA;&#x6709;&#x7B2C;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#xFF08;&#x5728;&#x6587;&#x6863;&#x904D;&#x5386;&#x6B21;&#x5E8F;&#x4E2D;&#xFF09;&#x88AB;&#x9009;&#x4E2D;&#x3002;</p>
+<h2 id="d3-select-node"><a href="#d3-select-node" class="headerlink" title="d3.select(node)"></a>d3.select(node)</h2><p>&#x9009;&#x62E9;&#x6307;&#x5B9A;&#x7684;&#x8282;&#x70B9;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x5F15;&#x7528;&#x8FD9;&#x5C06;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;&#x4F8B;&#x5982;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x4E2D;&#x7684;d3.select(this) &#x6216;&#x8005;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x4F8B;&#x5982;document.body&#x3002;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4E0D;&#x4F1A;&#x904D;&#x5386;DOM&#x6811;&#x3002;</p>
+<h2 id="d3-selectAll-selector"><a href="#d3-selectAll-selector" class="headerlink" title="d3.selectAll(selector)"></a>d3.selectAll(selector)</h2><p>&#x9009;&#x4E2D;&#x5339;&#x914D;&#x6307;&#x5B9A;&#x9009;&#x62E9;&#x5668;&#x7684;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x3002;&#x8FD9;&#x4E9B;&#x5143;&#x7D20;&#x4F1A;&#x6309;&#x7167;&#x6587;&#x6863;&#x7684;&#x904D;&#x5386;&#x987A;&#x5E8F;&#xFF08;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#xFF09;&#x9009;&#x62E9;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;&#x6587;&#x6863;&#x4E2D;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x5219;&#x8FD4;&#x56DE;&#x7A7A;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
+<h2 id="d3-selectAll-nodes"><a href="#d3-selectAll-nodes" class="headerlink" title="d3.selectAll(nodes)"></a>d3.selectAll(nodes)</h2><p>&#x9009;&#x62E9;&#x6307;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x4E00;&#x4E9B;&#x5143;&#x7D20;&#x7684;&#x5F15;&#x7528;&#x8FD9;&#x5C06;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#xFF0C;&#x4F8B;&#x5982;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x4E2D;&#x7684;d3.selectAll(this.childNodes)&#xFF0C;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x4F8B;&#x5982;document.links&#x3002;&#x8282;&#x70B9;&#x7684;&#x53C2;&#x6570;&#x4E0D;&#x7528;&#x6070;&#x597D;&#x662F;&#x6570;&#x7EC4;&#xFF1B;&#x4EFB;&#x4F55;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x7684;&#x4F2A;&#x6570;&#x7EC4;&#xFF08;&#x4F8B;&#x4E00;&#x4E2A;NodeList&#x6216;&#x8005; arguments&#xFF09;&#x90FD;&#x53EF;&#x4EE5;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4E0D;&#x4F1A;&#x904D;&#x5386;DOM&#x6811;&#x3002;</p>
+<ol>
+<li>&#x64CD;&#x4F5C;&#x9009;&#x62E9;</li>
+</ol>
+<p>&#x9009;&#x62E9;&#x662F;&#x4E00;&#x7EC4;&#x5143;&#x7D20;&#x3002;D3&#x7ED1;&#x5B9A;&#x989D;&#x5916;&#x7684;&#x65B9;&#x6CD5;&#x5230;&#x6570;&#x7EC4;&#x4E0A;&#x3002;&#x6240;&#x4EE5;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x4E0A;&#x5E94;&#x7528;&#x64CD;&#x4F5C;&#xFF0C;&#x4F8B;&#x5982;&#x4E3A;&#x6240;&#x6709;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x503C;&#x3002;&#x4E00;&#x4E2A;&#x7EC6;&#x5FAE;&#x7684;&#x5DEE;&#x522B;&#x662F;&#x9009;&#x62E9;&#x7ED3;&#x679C;&#x662F;&#x5206;&#x7EC4;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x90FD;&#x662F;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x3002;&#x8FD9;&#x4FDD;&#x7559;&#x4E86;&#x81EA;&#x9009;&#x62E9;&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x679C;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x4F60;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x8FD9;&#x4E2A;&#x7EC6;&#x8282;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x4E00;&#x4E2A;&#x5355;&#x4E00;&#x7684;&#x5143;&#x7D20;&#x9009;&#x62E9;&#x770B;&#x8D77;&#x6765;&#x50CF; [[node]] &#x800C;&#x4E0D;&#x662F; [node] &#x3002;&#x60F3;&#x8981;&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x5173;&#x4E8E;&#x5D4C;&#x5957;&#x9009;&#x62E9;&#x7684;&#x77E5;&#x8BC6;&#x8BF7;&#x53C2;&#x8003;&#x5D4C;&#x5957;&#x9009;&#x62E9;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8981;&#x5B66;&#x4E60;&#x9009;&#x62E9;&#x5668;&#x662F;&#x600E;&#x4E48;&#x5DE5;&#x4F5C;&#x7684;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x5DE5;&#x5177;&#x63A7;&#x5236;&#x53F0;&#x4EA4;&#x4E92;&#x5F0F;&#x5730;&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x68C0;&#x67E5;&#x8FD4;&#x56DE;&#x6570;&#x7EC4;&#x6765;&#x67E5;&#x770B;&#x54EA;&#x4E9B;&#x5143;&#x7D20;&#x88AB;&#x9009;&#x4E2D;&#x4E86;&#x4EE5;&#x53CA;&#x5B83;&#x4EEC;&#x662F;&#x5982;&#x4F55;&#x5206;&#x7EC4;&#x7684;&#x3002;&#x4F60;&#x8FD8;&#x53EF;&#x4EE5;&#x518D;&#x5E94;&#x7528;&#x64CD;&#x4F5C;&#x6765;&#x9009;&#x62E9;&#x5143;&#x7D20;&#x5E76;&#x67E5;&#x770B;&#x9875;&#x9762;&#x5185;&#x5BB9;&#x7684;&#x6539;&#x53D8;&#x3002;</p>
+<ol>
+<li>&#x5185;&#x5BB9;</li>
+</ol>
+<p>D3&#x6709;&#x4E00;&#x7CFB;&#x5217;&#x53EF;&#x4EE5;&#x5F71;&#x54CD;&#x6587;&#x6863;&#x5185;&#x5BB9;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x4E9B;&#x662F;&#x4F60;&#x6700;&#x5E38;&#x7528;&#x6765;&#x5C55;&#x793A;&#x6570;&#x636E;&#x7684;&#x3002;&#x5F53;&#x64CD;&#x4F5C;&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x6587;&#x6863;&#x5185;&#x5BB9;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x9009;&#x62E9;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x58F0;&#x660E;&#x5C06;&#x591A;&#x4E2A;&#x64CD;&#x4F5C;&#x94FE;&#x63A5;&#x5728;&#x4E00;&#x8D77;&#x3002;</p>
+<h2 id="selection-attr-name-value"><a href="#selection-attr-name-value" class="headerlink" title="selection.attr(name[, value])"></a>selection.attr(name[, value])</h2><p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;value&#x53C2;&#x6570;&#xFF0C;&#x5C06;&#x4E3A;&#x6240;&#x6709;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x7684;name&#x4E3A;&#x6307;&#x5B9A;&#x7684;value&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x90FD;&#x5C06;&#x8BBE;&#x7F6E;&#x4E3A;&#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x503C;&#xFF1B;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#xFF09;&#x8BA1;&#x7B97;&#x3002;&#x5165;&#x53C2;&#x662F;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5143;&#x7D20;d&#x548C;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;&#x4EE3;&#x8868;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x63A5;&#x4E0B;&#x6765;&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5C5E;&#x6027;&#x3002;null&#x503C;&#x5C06;&#x79FB;&#x9664;&#x6307;&#x5B9A;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<p>&#x5982;&#x679C;value&#x53C2;&#x6570;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x5C31;&#x4F1A;&#x8FD4;&#x56DE;&#x4E3A;&#x9009;&#x62E9;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#xFF08;null&#xFF09;&#x5143;&#x7D20;&#x6240;&#x6307;&#x5B9A;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x4E2D;&#x6070;&#x597D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x65F6;&#x624D;&#x6709;&#x7528;&#x3002;</p>
+<p>&#x6307;&#x5B9A;&#x7684;name&#x53C2;&#x6570;&#x4E5F;&#x4F1A;&#x542B;&#x6709;&#x4E00;&#x4E2A;&#x524D;&#x7F00;&#xFF0C;&#x4F8B;&#x5982;xlink:href&#x662F;&#x7528;&#x6765;&#x6307;&#x5B9A;Xlink&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;href&#x5C5E;&#x6027;&#x7684;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;D3&#x652F;&#x6301;svg&#x3001;xhtml&#x3001;xlink&#x3001;xml&#x548C; xmlns&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;d3.ns.prefix&#x6765;&#x6CE8;&#x518C;&#x5176;&#x4ED6;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;</p>
+<p>name&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;name&#x548C;value&#x5C5E;&#x6027;&#x5BF9;&#x8C61;&#x3002;</p>
+<h2 id="selection-classed-name-value"><a href="#selection-classed-name-value" class="headerlink" title="selection.classed(name[, value])"></a>selection.classed(name[, value])</h2><p>&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x662F;&#x7528;&#x6765;&#x8BBE;&#x7F6E;class&#x5C5E;&#x6027;&#x503C;&#x5F97;&#x4FBF;&#x6377;&#x7A0B;&#x5E8F;&#x3002;&#x5B83;&#x80FD;&#x8BC6;&#x522B;class&#x5C5E;&#x6027;&#x662F;&#x4E00;&#x4E2A;&#x6309;&#x7167;&#x7A7A;&#x683C;&#x5206;&#x9694;&#x7684;&#x6807;&#x8BB0;&#x96C6;&#x5408;&#x3002;&#x8FD9;&#x6837;&#x5B83;&#x5C31;&#x80FD;&#x4F7F;&#x7528;classList&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x6765;&#x65B9;&#x4FBF;&#x5730;&#x6DFB;&#x52A0;&#x3001;&#x79FB;&#x9664;&#x548C;&#x5207;&#x6362;CSS&#x7C7B;&#x3002;</p>
+<p>&#x5982;&#x679C;value&#x5C5E;&#x6027;&#x88AB;&#x6307;&#x5B9A;&#xFF0C;&#x4E0D;&#x8BBA;&#x662F;&#x5426;&#x6307;&#x5B9A;&#x7C7B;&#x90FD;&#x4F1A;&#x4E0E;&#x9009;&#x5B9A;&#x5143;&#x7D20;&#x76F8;&#x7ED3;&#x5408;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x91CF;&#x4E14;&#x5176;&#x503C;&#x4E3A;&#x771F;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x90FD;&#x4F1A;&#x88AB;&#x5206;&#x914D;&#x6307;&#x5B9A;&#x7684;&#x7C7B;&#xFF08;&#x8FD8;&#x6CA1;&#x5206;&#x914D;&#x7684;&#x8BDD;&#xFF09;&#x3002;&#x5982;&#x679C;&#x5176;&#x503C;&#x4E3A;&#x5047;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x79FB;&#x9664;&#x9009;&#x4E2D;&#x5143;&#x7D20;&#x7684;class&#xFF08;&#x5DF2;&#x7ECF;&#x5206;&#x914D;&#x8FC7;&#xFF09;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#xFF09;&#x8BA1;&#x7B97;&#x3002;&#x5165;&#x53C2;&#x662F;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5143;&#x7D20;d&#x548C;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;&#x4EE3;&#x8868;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x63A5;&#x4E0B;&#x6765;&#x7528;&#x6765;&#x5206;&#x914D;&#x6216;&#x8005;&#x4E0D;&#x5206;&#x914D;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;class&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4E00;&#x6B21;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;class&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x6587;&#x5B57;&#x5982;&#x540C;&#xFF1A;selection.classed({&#x2018;foo&#x2019;: true, &#x2018;bar&#x2019;: false})&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;&#x4EE5;&#x7A7A;&#x683C;&#x5206;&#x9694;&#x7684;class&#x5217;&#x8868;&#x5F62;&#x5982;&#xFF1A;selection.classed(&#x2018;foo bar&#x2019;, true)&#x3002;</p>
+<p>&#x5982;&#x679C;value&#x6CA1;&#x6709;&#x88AB;&#x6307;&#x5B9A;&#xFF0C;&#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x9009;&#x62E9;&#x4E2D;&#x9996;&#x4E2A;&#x975E;&#x7A7A;&#x503C;&#x6709;&#x6307;&#x5B9A;&#x7684;class&#x5C31;&#x4F1A;&#x8FD4;&#x56DE;true&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x4E2D;&#x6070;&#x597D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x65F6;&#x624D;&#x6709;&#x7528;&#x3002;</p>
+<h2 id="selection-style-name-value-priority"><a href="#selection-style-name-value-priority" class="headerlink" title="selection.style(name[, value[, priority]])"></a>selection.style(name[, value[, priority]])</h2><p>&#x5982;&#x679C;value&#x53C2;&#x6570;&#x88AB;&#x6307;&#x5B9A;&#xFF0C;&#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x548C;&#x6307;&#x5B9A;&#x7684;&#x503C;&#x4E3A;&#x6240;&#x6709;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x8BBE;&#x7F6E;CSS&#x6837;&#x5F0F;&#x5C5E;&#x6027;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x90FD;&#x8BBE;&#x7F6E;&#x76F8;&#x540C;&#x7684;&#x6837;&#x5F0F;&#x503C;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5982;&#x679C;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x8BE5;&#x51FD;&#x6570;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x4EF6;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#xFF09;&#x8BA1;&#x7B97;&#xFF0C;&#x5165;&#x53C2;&#x662F;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5143;&#x7D20;d&#x548C;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;&#x4EE3;&#x8868;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x88AB;&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6837;&#x5F0F;&#x5C5E;&#x6027;&#x3002; null&#x503C;&#x5C06;&#x5220;&#x9664;&#x6837;&#x5F0F;&#x5C5E;&#x6027;&#x3002;&#x53EF;&#x9009;&#x53C2;&#x6570;priority&#x4E5F;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;null&#x7A7A;&#x6216;&#x5B57;&#x7B26;&#x4E32;&#x201C;important&#x201D;&#xFF08;&#x4E0D;&#x5E26;&#x611F;&#x53F9;&#x53F7;&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4E00;&#x6B21;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;&#x6837;&#x5F0F;&#x5C5E;&#x6027;&#xFF0C;&#x4F7F;&#x7528;&#x5BF9;&#x8C61;&#x6587;&#x672C;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<p>selection.style({&#x2018;stroke&#x2019;: &#x2018;black&#x2019;, &#x2018;stroke-width&#x2019;: 2})<br>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;&#x503C;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5728;&#x9009;&#x62E9;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#x5143;&#x7D20;&#x6307;&#x5B9A;&#x6837;&#x5F0F;&#x5C5E;&#x6027;&#x7684;&#x5F53;&#x524D;&#x8BA1;&#x7B97;&#x503C;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x65F6;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x8BA1;&#x7B97;&#x7684;&#x503C;&#x53EF;&#x80FD;&#x4E0E;&#x5148;&#x524D;&#x8BBE;&#x7F6E;&#x7684;&#x503C;&#x4E0D;&#x540C;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5F53;&#x6837;&#x5F0F;&#x5C5E;&#x6027;&#x4F7F;&#x7528;&#x4E86;&#x7B80;&#x5199;&#x5C5E;&#x6027;&#xFF08;&#x5982;&#x201C;font&#x201D;&#x6837;&#x5F0F;&#xFF0C;&#x8FD9;&#x662F;&#x7B80;&#x5199;&#x4E3A;&#x201D;font-size&#x201D;&#xFF0C;&#x201D;font-face&#x201D;,&#x201C;&#x7B49;&#xFF09;&#x3002;</p>
+<h2 id="selection-property-name-value"><a href="#selection-property-name-value" class="headerlink" title="selection.property(name[, value])"></a>selection.property(name[, value])</h2><p>&#x4E00;&#x4E9B;HTML&#x5143;&#x7D20;&#x5177;&#x6709;&#x7279;&#x6B8A;&#x7684;&#x5C5E;&#x6027;&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x7684;&#x5C5E;&#x6027;&#x6216;&#x6837;&#x5F0F;&#x662F;&#x4E0D;&#x53EF;&#x5BFB;&#x5740;&#x7684;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8868;&#x5355;&#x6587;&#x672C;&#xFF08;text&#xFF09;&#x5B57;&#x6BB5;&#x6709;&#x4E00;&#x4E2A;value&#x5B57;&#x7B26;&#x4E32;&#x5C5E;&#x6027;&#xFF0C;&#x590D;&#x9009;&#x6846;&#xFF08;checkboxes&#xFF09;&#x6709;&#x4E00;&#x4E2A;checked&#x5E03;&#x5C14;&#x578B;&#x5C5E;&#x6027;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;property&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#xFF0C;&#xFF0C;&#x6216;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x57FA;&#x672C;&#x5143;&#x7D20;&#x7684;&#x53EF;&#x5BFB;&#x5740;&#x5B57;&#x6BB5;&#xFF0C;&#x4F8B;&#x5982;className&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;value&#xFF0C;&#x5C31;&#x4E3A;&#x6240;&#x6709;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7684;&#x5C5E;&#x6027;&#x8BBE;&#x7F6E;&#x6307;&#x5B9A;&#x7684;&#x503C;&#xFF08;value&#xFF09;&#x3002;&#x5982;&#x679C;&#x503C;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x7ED9;&#x4E88;&#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x503C;&#xFF1B;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x8BE5;&#x51FD;&#x6570;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#xFF09;&#x8BA1;&#x7B97;&#xFF0C;&#x5165;&#x53C2;&#x662F;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5143;&#x7D20;d&#x548C;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;&#x4EE3;&#x8868;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x88AB;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5C5E;&#x6027;&#x3002;&#x7A7A;&#x503C;&#x5C06;&#x5220;&#x9664;&#x6307;&#x5B9A;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4E00;&#x6B21;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5BF9;&#x8C61;&#x6587;&#x672C;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;selection.property({&#x2018;foo&#x2019;: &#x2018;bar&#x2019;, &#x2018;baz&#x2019;: &#x2018;qux&#x2019;})&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;&#x503C;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5728;&#x9009;&#x62E9;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#x5143;&#x7D20;&#x6307;&#x5B9A;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8FD9;&#x901A;&#x5E38;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<h2 id="selection-text-value"><a href="#selection-text-value" class="headerlink" title="selection.text([value])"></a>selection.text([value])</h2><p>&#x6587;&#x672C;&#x64CD;&#x4F5C;&#x7B26;&#x662F;&#x57FA;&#x4E8E;textContent&#x5C5E;&#x6027;&#xFF1B;&#x8BBE;&#x7F6E;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x5C06;&#x53D6;&#x4EE3;&#x4EFB;&#x4F55;&#x73B0;&#x6709;&#x7684;&#x5B50;&#x5143;&#x7D20;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;value&#x65F6;&#xFF0C;&#x8BBE;&#x7F6E;&#x6240;&#x6709;&#x9009;&#x62E9;&#x5143;&#x7D20;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x8D4B;&#x4E88;&#x76F8;&#x540C;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#xFF1B;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x8BE5;&#x51FD;&#x6570;&#x88AB;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#xFF09;&#x8BA1;&#x7B97;&#xFF0C;&#x5165;&#x53C2;&#x662F;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5143;&#x7D20;d&#x548C;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;&#x4EE3;&#x8868;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x88AB;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x3002;null&#x503C;&#x4F1A;&#x6E05;&#x9664;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;value&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5728;&#x9009;&#x62E9;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#x5143;&#x7D20;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x65F6;&#x8FD9;&#x901A;&#x5E38;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<h2 id="selection-html-value"><a href="#selection-html-value" class="headerlink" title="selection.html([value])"></a>selection.html([value])</h2><p>html&#x7684;&#x64CD;&#x4F5C;&#x57FA;&#x4E8E;innerHTML&#x5C5E;&#x6027;&#xFF1B;&#x8BBE;&#x7F6E;&#x5185;&#x90E8;HTML&#x5185;&#x5BB9;&#x5C06;&#x53D6;&#x4EE3;&#x4EFB;&#x4F55;&#x73B0;&#x6709;&#x7684;&#x5B50;&#x5143;&#x7D20;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x60A8;&#x53EF;&#x80FD;&#x66F4;&#x613F;&#x610F;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x9A71;&#x52A8;&#x7684;&#x65B9;&#x5F0F;append&#x6216;insert&#x64CD;&#x4F5C;&#x521B;&#x5EFA;HTML&#x5185;&#x5BB9;;&#x8BE5;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x76EE;&#x7684;&#x662F;&#xFF0C;&#x9002;&#x7528;&#x4E8E;&#x4F60;&#x60F3;&#x7528;&#x5C11;&#x91CF;&#x4F46;&#x6709;&#x4E30;&#x5BCC;&#x683C;&#x5F0F;&#x7684;HTML&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;value&#xFF0C;&#x4E3A;&#x6240;&#x6709;&#x9009;&#x62E9;&#x7684;&#x5143;&#x7D20;&#x8BBE;&#x7F6E;&#x5728;&#x5185;&#x90E8;&#x7684;HTML&#x5185;&#x5BB9;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x7ED9;&#x4E88;&#x76F8;&#x540C;&#x7684;&#x5185;&#x90E8;HTML&#x5185;&#x5BB9;&#xFF1B;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x8BE5;&#x51FD;&#x6570;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#xFF09;&#x8BA1;&#x7B97;&#xFF0C;&#x5165;&#x53C2;&#x662F;&#x5F53;&#x524D;&#x6570;&#x636E;&#x5143;&#x7D20;d&#x548C;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;&#x4EE3;&#x8868;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x88AB;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5355;&#x5143;&#x7684;&#x5185;&#x90E8;&#x7684;HTML&#x5185;&#x5BB9;&#x3002;null&#x503C;&#x4F1A;&#x6E05;&#x9664;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;value&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5728;&#x9009;&#x62E9;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#x5143;&#x7D20;&#x7684;&#x5185;&#x90E8;HTML&#x5185;&#x5BB9;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x65F6;&#x8FD9;&#x901A;&#x5E38;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002; &#x6CE8;&#xFF1A;&#x6B63;&#x5982;&#x5B83;&#x7684;&#x540D;&#x5B57;&#x6240;&#x6697;&#x793A;&#x7684;&#xFF0C;selection.html&#x4EC5;&#x652F;&#x6301;HTML&#x5143;&#x7D20;&#x3002; SVG&#x5143;&#x7D20;&#x548C;&#x5176;&#x5B83;&#x975E;HTML&#x5143;&#x7D20;&#x4E0D;&#x652F;&#x6301;innerHTML&#x5C5E;&#x6027;&#xFF0C;&#x56E0;&#x6B64;&#x4E0E;selection.html&#x4E0D;&#x76F8;&#x5BB9;&#x3002;&#x8BF7;&#x8003;&#x8651;&#x4F7F;&#x7528;XMLSerializer&#x8F6C;&#x6362;DOM&#x6811;&#x4E3A;&#x6587;&#x672C;&#x3002;&#x7075;&#x53C2;&#x89C1;innersvg polyfill&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x57AB;&#x7247;&#x4EE5;&#x652F;&#x6301;SVG&#x5143;&#x7D20;&#x7684;innerHTML&#x5C5E;&#x6027;&#x3002;</p>
+<h2 id="selection-append-name"><a href="#selection-append-name" class="headerlink" title="selection.append(name)"></a>selection.append(name)</h2><p>&#x5728;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x6700;&#x540E;&#x8FFD;&#x52A0;&#x5177;&#x6709;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7684;&#x65B0;&#x5143;&#x7D20;&#xFF0C;&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x8FFD;&#x52A0;&#x5143;&#x7D20;&#x7684;&#x65B0;&#x9009;&#x62E9;&#x3002;&#x6BCF;&#x4E2A;&#x65B0;&#x7684;&#x5143;&#x7D20;&#x7EE7;&#x627F;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x7684;&#x6570;&#x636E;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x548C;select&#x76F8;&#x540C;&#x7684;&#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x5B50;&#x9009;&#x62E9;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;name&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x5E38;&#x91CF;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x8FFD;&#x52A0;&#x7684;DOM&#x5143;&#x7D20;&#x3002;&#x5F53;name&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5B83;&#x53EF;&#x80FD;&#x6709;&#x4EE5;&#x4E0B;&#x5F62;&#x5F0F;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x524D;&#x7F00;&#x201C;namespace:tag&#x201D;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x201C;svg:text&#x201D;&#x5C06;&#x5728;svg&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x521B;&#x5EFA;&#x201C;text&#x201D;&#x5143;&#x7D20;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;D3&#x652F;&#x6301;svg&#xFF0C;xhtml&#xFF0C;xlink&#x7684;&#xFF0C;xml&#x548C;xmlns&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;&#x5176;&#x4ED6;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x5230;d3.ns.prefix&#x6CE8;&#x518C;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;&#x90A3;&#x4E48;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4F1A;&#x4ECE;&#x5C01;&#x95ED;&#x7684;&#x5143;&#x7D20;&#x7EE7;&#x627F;&#xFF1B;&#x6216;&#x8005;&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x540D;&#x79F0;&#x662F;&#x5DF2;&#x77E5;&#x7684;&#x524D;&#x7F00;&#x4E4B;&#x4E00;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x5C06;&#x88AB;&#x4F7F;&#x7528;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x201C;svg&#x201D;&#x8868;&#x793A;&#x201C;svg:svg&#x201D;&#xFF09;&#x3002;</p>
+<h2 id="selection-insert-name-before"><a href="#selection-insert-name-before" class="headerlink" title="selection.insert(name[, before])"></a>selection.insert(name[, before])</h2><p>&#x5728;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x4E0E;&#x6307;&#x5B9A;before&#x9009;&#x62E9;&#x5668;&#x5339;&#x914D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x4E4B;&#x524D;&#x63D2;&#x5165;&#x5177;&#x6709;&#x6307;&#x5B9A;name&#x7684;&#x65B0;&#x5143;&#x7D20;&#xFF0C;&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x63D2;&#x5165;&#x7684;&#x5143;&#x7D20;&#x7684;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x9009;&#x62E9;&#x3002;&#x5982;&#x679C;before&#x9009;&#x62E9;&#x5668;&#x4E0D;&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#xFF0C;&#x90A3;&#x4E48;&#x65B0;&#x5143;&#x7D20;&#x5C06;&#x7528;append&#x8FFD;&#x52A0;&#x4E3A;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5B50;&#x5143;&#x7D20;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x65B0;&#x5143;&#x7D20;&#x7EE7;&#x627F;&#x5F53;&#x524D;&#x5143;&#x7D20;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5B50;&#x9009;&#x62E9;&#xFF08;subselections&#xFF09;&#x548C;select&#x4EE5;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;name&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x5E38;&#x91CF;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x8FFD;&#x52A0;&#x7684;DOM&#x5143;&#x7D20;&#x3002;&#x5F53;name&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5B83;&#x53EF;&#x80FD;&#x6709;&#x4EE5;&#x4E0B;&#x5F62;&#x5F0F;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x524D;&#x7F00;&#x201C;namespace:tag&#x201D;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x201C;svg:text&#x201D;&#x5C06;&#x5728;svg&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x521B;&#x5EFA;&#x201C;text&#x201D;&#x5143;&#x7D20;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;D3&#x652F;&#x6301;svg&#xFF0C;xhtml&#xFF0C;xlink&#x7684;&#xFF0C;xml&#x548C;xmlns&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;&#x5176;&#x4ED6;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x5230;d3.ns.prefix&#x6CE8;&#x518C;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;&#x90A3;&#x4E48;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4F1A;&#x4ECE;&#x5C01;&#x95ED;&#x7684;&#x5143;&#x7D20;&#x7EE7;&#x627F;&#xFF1B;&#x6216;&#x8005;&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x540D;&#x79F0;&#x662F;&#x5DF2;&#x77E5;&#x7684;&#x524D;&#x7F00;&#x4E4B;&#x4E00;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x5C06;&#x88AB;&#x4F7F;&#x7528;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x201C;svg&#x201D;&#x8868;&#x793A;&#x201C;svg:svg&#x201D;&#xFF09;&#x3002;</p>
+<p>&#x540C;&#x6837;&#x5730;&#xFF0C;before&#x9009;&#x62E9;&#x5668;&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;DOM&#x5143;&#x7D20;&#x3002;&#x4F8B;&#x5982;&#xFF0C;insert(&#x201C;div&#x201D;, &#x201C;:first-child&#x201D;)&#x5C06;&#x5728;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x524D;&#x9762;&#x52A0;&#x4E0A;div&#x5B50;&#x8282;&#x70B9;&#x3002;&#x5BF9;&#x4E8E;enter&#x9009;&#x62E9;&#x5668;&#xFF0C;before&#x9009;&#x62E9;&#x5668;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4E5F;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#xFF1A;&#x8F93;&#x5165;&#x7684;&#x5143;&#x7D20;&#x5C06;&#x88AB;&#x7ACB;&#x5373;&#x63D2;&#x5165;&#x5230;&#x66F4;&#x65B0;&#x9009;&#x62E9;&#x7D27;&#x968F;&#x7684;&#x5144;&#x5F1F;&#x5143;&#x7D20;&#x524D;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x3002;&#x8FD9;&#x4F7F;&#x60A8;&#x53EF;&#x4EE5;&#x63D2;&#x5165;DOM&#x7684;&#x5143;&#x7D20;&#x4E0E;&#x7ED1;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x662F;&#x4E00;&#x81F4;&#x7684;&#x987A;&#x5E8F;&#x3002;&#x4F46;&#x662F;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x66F4;&#x65B0;&#x5143;&#x7D20;&#x4FEE;&#x6539;&#x4E86;&#x987A;&#x5E8F;&#xFF0C;selection.order&#x53EF;&#x80FD;&#x4ECD;&#x7136;&#x9700;&#x8981;&#x3002;</p>
+<h2 id="selection-remove"><a href="#selection-remove" class="headerlink" title="selection.remove()"></a>selection.remove()</h2><p>&#x5220;&#x9664;&#x4ECE;&#x5F53;&#x524D;&#x6587;&#x6863;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x3002;&#x8FD4;&#x56DE;&#x201C;&#x5C4F;&#x5E55;&#x5916;&#xFF08;off-screen&#xFF09;&#x201D;&#x7684;&#x5F53;&#x524D;&#x9009;&#x62E9;&#xFF08;&#x9664;&#x53BB;&#x4E86;&#x76F8;&#x540C;&#x7684;&#x5143;&#x7D20;&#xFF09;&#xFF0C;&#x4ECE;DOM&#x5206;&#x79BB;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x76EE;&#x524D;&#x8FD8;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x4E13;&#x95E8;&#x7684;API&#x6765;&#x91CD;&#x65B0;&#x6DFB;&#x52A0;&#x5220;&#x9664;&#x7684;&#x5143;&#x7D20;&#x5230;&#x6587;&#x6863;&#xFF1B;&#x7136;&#x800C;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6765;selection.append&#x6216;selection.insert&#x91CD;&#x65B0;&#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x3002;</p>
+<p>&#x6570;&#x636E;</p>
+<h2 id="selection-data-values-key"><a href="#selection-data-values-key" class="headerlink" title="selection.data([values[, key]])"></a>selection.data([values[, key]])</h2><p>&#x8FDE;&#x63A5;&#x6307;&#x5B9A;&#x7684;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x7684;&#x548C;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x3002;&#x6307;&#x5B9A;&#x7684;values&#x662F;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x503C;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x6570;&#x5B57;&#x6216;&#x5BF9;&#x8C61;&#xFF09;&#x6216;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x7EC4;&#x503C;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;key&#x51FD;&#x6570;&#xFF0C;&#x5219;values&#x7684;&#x7B2C;&#x4E00;&#x6570;&#x636E;&#x88AB;&#x5206;&#x914D;&#x5230;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x4E2D;&#x7B2C;&#x4E00;&#x5143;&#x7D20;&#xFF0C;&#x7B2C;&#x4E8C;&#x6570;&#x636E;&#x5206;&#x914D;&#x7ED9;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x4F9D;&#x6B64;&#x7C7B;&#x63A8;&#x3002;&#x5F53;&#x6570;&#x636E;&#x88AB;&#x5206;&#x914D;&#x7ED9;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5B83;&#x88AB;&#x5B58;&#x50A8;&#x5728;&#x5C5E;&#x6027;<strong>data</strong>&#x4E2D;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x6570;&#x636E;&#x201C;&#x6CBE;&#x7C98;&#x201D;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x518D;&#x9009;&#x62E9;&#x3002;</p>
+<p>data&#x64CD;&#x4F5C;&#x7684;&#x7ED3;&#x679C;&#x662F;update&#x9009;&#x62E9;;&#x8FD9;&#x8868;&#x793A;&#x9009;&#x62E9;&#x7684;DOM&#x5143;&#x7D20;&#x5DF2;&#x6210;&#x529F;&#x7ED1;&#x5B9A;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x5143;&#x7D20;&#x3002;update&#x9009;&#x62E9;&#x8FD8;&#x5305;&#x542B;&#x5BF9;enter&#x548C;exit&#x7684;&#x9009;&#x62E9;&#xFF0C;&#x5BF9;&#x5E94;&#x4E8E;&#x6DFB;&#x52A0;&#x548C;&#x5220;&#x9664;&#x6570;&#x636E;&#x8282;&#x70B9;&#x3002;&#x6709;&#x5173;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x53C2;&#x9605;&#x7B80;&#x77ED;&#x7684;&#x6559;&#x7A0B;&#x5173;&#x4E8E;&#x8FDE;&#x63A5;&#x7684;&#x601D;&#x8003;</p>
+<p>key&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x63A7;&#x5236;&#x6570;&#x636E;&#x662F;&#x5982;&#x4F55;&#x8FDE;&#x63A5;&#x5143;&#x7D20;&#x3002;&#x8FD9;&#x53D6;&#x4EE3;&#x9ED8;&#x8BA4;&#x7684;by-index&#x884C;&#x4E3A;;key&#x51FD;&#x6570;&#x88AB;&#x65B0;&#x6570;&#x636E;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x8C03;&#x7528;&#x4E00;&#x6B21;&#xFF0C;&#x5E76;&#x518D;&#x6B21;&#x7528;&#x4E8E;&#x9009;&#x62E9;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x3002;&#x5728;&#x8FD9;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x7684;key&#x51FD;&#x6570;&#x662F;&#x901A;&#x8FC7;&#x4F20;&#x9012;&#x6570;&#x636E;d&#x4E0E;&#x7D22;&#x5F15;i&#x3002;&#x5F53;key &#x51FD;&#x6570;&#x4E0A;&#x88AB;&#x65B0;&#x7684;&#x6570;&#x636E;&#x5143;&#x7D20;&#x8BC4;&#x4EF7;&#x65F6;&#xFF0C;this&#x4E0A;&#x4E0B;&#x6587;&#x662F;&#x6570;&#x636E;&#x6570;&#x7EC4;&#xFF1B;&#x5F53;key &#x51FD;&#x6570;&#x88AB;&#x73B0;&#x6709;&#x9009;&#x62E9;&#x8BC4;&#x4F30;&#x65F6;&#xFF0C;this&#x4E0A;&#x4E0B;&#x6587;&#x662F;&#x76F8;&#x5173;&#x7684;DOM&#x5143;&#x7D20;&#x3002;key&#x51FD;&#x6570;&#xFF0C;&#x57FA;&#x4E8E;&#x5148;&#x524D;&#x7ED3;&#x5408;&#x7684;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x548C;&#x76F8;&#x5173;&#x7684;&#x5143;&#x7D20;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;&#x5B57;&#x6BB5;name&#xFF0C;&#x8BE5;&#x8FDE;&#x63A5;&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;.data(data, function(d) { return d.name; })&#x3002;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;key&#x51FD;&#x6570;&#xFF0C;data&#x64CD;&#x4F5C;&#x7B26;&#x4E5F;&#x5F71;&#x54CD;&#x8282;&#x70B9;&#x7684;&#x7D22;&#x5F15;&#xFF1B;&#x8BE5;&#x7D22;&#x5F15;&#x88AB;&#x4F5C;&#x4E3A;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;i&#x4F5C;&#x4E3A;&#x4EFB;&#x4F55;&#x8FD0;&#x7B97;&#x7B26;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x73B0;&#x6709;&#x7684;DOM&#x5143;&#x7D20;&#x4E0D;&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x6392;&#x5E8F;&#xFF1B;&#x6839;&#x636E;&#x9700;&#x8981;&#x4F7F;&#x7528;sort&#x6216;order&#x51FD;&#x6570;&#x3002;&#x6709;&#x5173;key&#x51FD;&#x6570;&#x5982;&#x4F55;&#x5F71;&#x54CD;&#x6570;&#x636E;&#x8FDE;&#x63A5;&#x7684;&#x66F4;&#x8BE6;&#x7EC6;&#x7684;&#x793A;&#x4F8B;&#xFF0C;&#x8BF7;&#x53C2;&#x9605;&#x6559;&#x7A0B;&#x6761;&#x5F62;&#x56FE;2</p>
+<p>&#x8FD9;&#x4E2A;values&#x9009;&#x62E9;&#x4E2D;&#x7684;&#x6BCF;&#x7EC4;&#x6570;&#x636E;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x9009;&#x62E9;&#x5177;&#x6709;&#x591A;&#x4E2A;&#x7EC4;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x4E00;&#x4E2A;d3.selectAll&#x540E;&#x8DDF;&#x4E00;&#x4E2A;selection.selectAll)&#xFF09;&#xFF0C;&#x7136;&#x540E;data&#x5E94;&#x8BE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF08;&#x5047;&#x8BBE;&#x4F60;&#x5BF9;&#x6BCF;&#x4E2A;&#x7EC4;&#x60F3;&#x8981;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#xFF09;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x5C06;&#x88AB;&#x4F20;&#x9012;&#x7684;&#x5F53;&#x524D;&#x7EC4;&#x6570;&#x636E;&#xFF08;&#x6216;undefined&#xFF09;&#x548C;&#x7D22;&#x5F15;&#xFF0C;&#x7EC4;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x4E00;&#x4E2A;&#x4E8C;&#x7EF4;&#x6570;&#x7EC4;&#x548C;&#x521D;&#x59CB;&#x9009;&#x62E9;&#x7ED1;&#x5B9A;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5305;&#x542B;&#x7684;&#x5185;&#x90E8;&#x6570;&#x7EC4;&#x548C;&#x6BCF;&#x4E2A;&#x5B50;&#x9009;&#x62E9;&#x7ED1;&#x5B9A;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;values&#x51FD;&#x6570;&#x662F;&#x6807;&#x8BC6;&#x51FD;&#x6570;&#xFF1A;&#x5B83;&#x88AB;&#x6BCF;&#x4E2A;&#x7EC4;&#x4E2D;&#x7684;&#x5B50;&#x5143;&#x7D20;&#x8C03;&#x7528;&#xFF0C;&#x88AB;&#x4F20;&#x9012;&#x7ED1;&#x5B9A;&#x5230;&#x7236;&#x5143;&#x7D20;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x6570;&#x7EC4;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var matrix = [</div><div class="line">  [11975,  5871, 8916, 2868],</div><div class="line">  [ 1951, 10048, 2060, 6171],</div><div class="line">  [ 8010, 16145, 8090, 8045],</div><div class="line">  [ 1013,   990,  940, 6907]</div><div class="line">];</div><div class="line"></div><div class="line">var tr = d3.select(&quot;body&quot;).append(&quot;table&quot;).selectAll(&quot;tr&quot;)</div><div class="line">    .data(matrix)</div><div class="line">  .enter().append(&quot;tr&quot;);</div><div class="line"></div><div class="line">var td = tr.selectAll(&quot;td&quot;)</div><div class="line">    .data(function(d) { return d; })</div><div class="line">  .enter().append(&quot;td&quot;)</div><div class="line">    .text(function(d) { return d; });</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;values&#xFF0C;&#x5219;&#x6B64;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x9009;&#x62E9;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x5C06;&#x4E0E;&#x7B2C;&#x4E00;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x5339;&#x914D;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x7684;&#x7D22;&#x5F15;&#x5C06;&#x5339;&#x914D;&#x9009;&#x62E9;&#x4E2D;&#x76F8;&#x5E94;&#x7684;&#x7D22;&#x5F15;&#x3002;&#x5982;&#x679C;&#x9009;&#x62E9;&#x7684;&#x67D0;&#x4E9B;&#x5143;&#x7D20;&#x4E3A;null&#xFF0C;&#x6216;&#x8005;&#x5982;&#x679C;&#x4ED6;&#x4EEC;&#x6709;&#x6CA1;&#x6709;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5219;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x76F8;&#x5E94;&#x5143;&#x7D20;&#x5C06;&#x662F;undefined&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;data&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x7528;&#x4E8E;&#x6E05;&#x9664;&#x5148;&#x524D;&#x7ED3;&#x5408;&#x6570;&#x636E;&#xFF1B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;selection.datum&#x4EE3;&#x66FF;&#x3002;</p>
+<h2 id="selection-enter"><a href="#selection-enter" class="headerlink" title="selection.enter()"></a>selection.enter()</h2><p>&#x8FD4;&#x56DE;&#x8F93;&#x5165;&#xFF08;enter&#xFF09;&#x9009;&#x62E9;&#xFF1A;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x4E2D;&#x5B58;&#x5728;&#x4F46;&#x662F;&#x5F53;&#x524D;DOM&#x5143;&#x7D20;&#x4E2D;&#x8FD8;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5143;&#x7D20;&#x7684;&#x5360;&#x4F4D;&#x7B26;&#x8282;&#x70B9;&#x3002;&#x6B64;&#x65B9;&#x6CD5;&#x53EA;&#x5728;&#x7531;data&#x8FD0;&#x7B97;&#x7B26;&#x8FD4;&#x56DE;&#x7684;&#x66F4;&#x65B0;&#x9009;&#x62E9;&#x4E2D;&#x5B9A;&#x4E49;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x8F93;&#x5165;&#x9009;&#x62E9;&#x53EA;&#x5B9A;&#x4E49;&#x4E86;append&#xFF08;append&#xFF09;&#xFF0C;insert&#xFF08;insert&#xFF09;&#xFF0C;select&#xFF08;select&#xFF09;&#x548C;call&#xFF08;call&#xFF09;&#x64CD;&#x4F5C;&#x7B26;&#xFF1B;&#x60A8;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#x7B26;&#x5728;&#x4FEE;&#x6539;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#x4E4B;&#x524D;&#x5B9E;&#x4F8B;&#x5316;&#x8F93;&#x5165;&#x5143;&#x7D20;&#x3002;&#x5F53;&#x4F60;&#x4F20;&#x9012;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x7ED9;&#x8FD9;&#x4E9B;&#x63D2;&#x5165;&#x7684;&#x5143;&#x7D20;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x65F6;&#xFF0C;index&#x53C2;&#x6570;&#x5C06;&#x53CD;&#x6620;&#x65B0;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x800C;&#x4E0D;&#x4E00;&#x5B9A;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x6216;&#x8005;&#x662F;&#x8FDE;&#x7EED;&#x7684;&#x3002; &#xFF08;&#x8F93;&#x5165;&#x9009;&#x62E9;&#x4E5F;&#x652F;&#x6301;empty&#x548C;size&#x3002;&#xFF09;</p>
+<p>&#x4E3E;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x8003;&#x8651;&#x73B0;&#x6709;&#x7684;&#x9009;&#x62E9;&#x662F;&#x7A7A;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x6765;&#x5339;&#x914D;&#x6211;&#x4EEC;&#x7684;&#x6570;&#x636E;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)</div><div class="line">    .data([4, 8, 15, 16, 23, 42])</div><div class="line">  .enter().append(&quot;div&quot;)</div><div class="line">    .text(function(d) { return d; });</div></pre></td></tr></table></figure>
+<p>&#x5047;&#x8BBE;body&#x6700;&#x521D;&#x662F;&#x7A7A;&#x7684;&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5C06;&#x521B;&#x5EFA;&#x516D;&#x4E2A;&#x65B0;&#x7684;div&#x5143;&#x7D20;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x6309;&#x987A;&#x5E8F;&#x8FFD;&#x52A0;&#x5230;body&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5176;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x4E3A;&#x76F8;&#x5E94;&#x7684;&#xFF08;&#x5F3A;&#x5236;&#x8F6C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#x53F7;&#x7801;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;4&lt;/div&gt;</div><div class="line">&lt;div&gt;8&lt;/div&gt;</div><div class="line">&lt;div&gt;15&lt;/div&gt;</div><div class="line">&lt;div&gt;16&lt;/div&gt;</div><div class="line">&lt;div&gt;23&lt;/div&gt;</div><div class="line">&lt;div&gt;42&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x8003;&#x8651;&#x8FDB;&#x5165;&#x7684;&#x5360;&#x4F4D;&#x7B26;&#x7684;&#x8282;&#x70B9;&#x662F;&#xFF0C;&#x5B83;&#x4EEC;&#x662F;&#x6307;&#x5411;&#x7236;&#x8282;&#x70B9;&#xFF08;&#x5728;&#x8BE5;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x5C31;&#x662F;&#x6587;&#x6863;&#x7684;body&#xFF09;&#xFF1B;&#x7136;&#x800C;&#xFF0C;&#x4ED6;&#x4EEC;&#x53EA;&#x652F;&#x6301;&#x8FFD;&#x52A0;&#x548C;&#x63D2;&#x5165;&#x3002; &#x5F53;&#x4F60;&#x8FFD;&#x52A0;&#x6216;&#x63D2;&#x5165;&#x65F6;&#x8F93;&#x5165;&#x9009;&#x62E9;&#x5E76;&#x5165;&#x5230;&#x66F4;&#x65B0;&#x9009;&#x62E9;&#x3002;&#x800C;&#x4E0D;&#x662F;&#x5BF9;enter&#x548C;update&#x9009;&#x62E9;&#x5355;&#x72EC;&#x91C7;&#x7528;&#x540C;&#x6837;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x73B0;&#x5728;&#x4F60;&#x53EF;&#x4EE5;&#x4E00;&#x6B21;&#x6DFB;&#x52A0;&#x8282;&#x70B9;&#x540E;&#xFF0C;&#x5C06;&#x5176;&#x5E94;&#x7528;&#x5230;&#x66F4;&#x65B0;&#x9009;&#x62E9;&#x3002;&#x5982;&#x679C;&#x4F60;&#x53D1;&#x73B0;&#x81EA;&#x5DF1;&#x79FB;&#x9664;&#x6574;&#x4E2A;&#x9009;&#x62E9;&#x7684;&#x5143;&#x7D20;&#x624D;&#x91CD;&#x65B0;&#x63D2;&#x5165;&#x5176;&#x4E2D;&#x5927;&#x90E8;&#x5206;&#xFF0C;&#x7528;&#x8FD9;&#x4E2A;&#x6765;&#x66FF;&#x4EE3;&#x3002;&#x4F8B;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var update_sel = svg.selectAll(&quot;circle&quot;).data(data)</div><div class="line">update_sel.attr(/* operate on old elements only */)</div><div class="line">update_sel.enter().append(&quot;circle&quot;).attr(/* operate on new elements only */)</div><div class="line">update_sel.attr(/* operate on old and new elements */)</div><div class="line">update_sel.exit().remove() /* complete the enter-update-exit pattern */</div></pre></td></tr></table></figure></p>
+<h2 id="selection-exit"><a href="#selection-exit" class="headerlink" title="selection.exit()"></a>selection.exit()</h2><p>&#x8FD4;&#x56DE;&#x9000;&#x51FA;&#xFF08;exit&#xFF09;&#x9009;&#x62E9;&#xFF1A;&#x627E;&#x51FA;&#x5728;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x5B58;&#x5728;&#x7684;DOM&#x5143;&#x7D20;&#x4E2D;&#x6CA1;&#x6709;&#x65B0;&#x7684;&#x6570;&#x636E;&#x5143;&#x7D20;&#x65F6;&#x3002;&#x6B64;&#x65B9;&#x6CD5;&#x53EA;&#x88AB;&#x5B9A;&#x4E49;&#x5728;data&#x8FD0;&#x7B97;&#x7B26;&#x8FD4;&#x56DE;&#x7684;&#x66F4;&#x65B0;&#x9009;&#x62E9;&#x3002;exit&#x9009;&#x62E9;&#x5B9A;&#x4E49;&#x4E86;&#x6240;&#x6709;&#x7684;&#x6B63;&#x5E38;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x4F46;&#x901A;&#x5E38;&#x4F60;&#x4E3B;&#x8981;&#x4F7F;&#x7528;&#x7684;&#x662F;remove&#xFF1B;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x7B26;&#x5B58;&#x5728;&#x7684;&#x4E3B;&#x8981;&#x76EE;&#x7684;&#x662F;&#x8BA9;&#x60A8;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x9000;&#x51FA;&#x7684;&#x8FC7;&#x6E21;&#x3002;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;exit&#x64CD;&#x4F5C;&#x7B26;&#x53EA;&#x662F;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;exit&#x9009;&#x62E9;&#x5F15;&#x7528;&#xFF0C;&#x7531;&#x4F60;&#x6765;&#x5220;&#x9664;&#x65B0;&#x8282;&#x70B9;&#x3002; &#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x8003;&#x8651;&#x66F4;&#x65B0;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x7684;enter&#x64CD;&#x4F5C;&#x7B26;&#x521B;&#x5EFA;&#x7684;&#x516D;&#x4E2A;DIV&#x5143;&#x7D20;&#x3002;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x8FD9;&#x4E9B;&#x5143;&#x7D20;&#x548C;&#x4E00;&#x4E2A;&#x542B;&#x6709;&#x4E00;&#x4E9B;&#x65B0;&#x7684;&#xFF0C;&#x4E00;&#x4E9B;&#x65E7;&#x6570;&#x636E;&#x7684;&#x65B0;&#x6570;&#x7EC4;&#x7ED1;&#x5B9A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var div = d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)</div><div class="line">    .data([1, 2, 4, 8, 16, 32], function(d) { return d; });</div></pre></td></tr></table></figure></p>
+<p>&#x73B0;&#x5728;div&#x2013;data&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x7ED3;&#x679C;&#x2013;&#x6307;&#x7684;&#x662F;&#x66F4;&#x65B0;&#x7684;&#x9009;&#x62E9;&#x3002;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x6307;&#x5B9A;&#x7684;key&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x6807;&#x8BC6;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x65B0;&#x6570;&#x636E;&#x6570;&#x7EC4;&#x5305;&#x542B;&#x6570;&#x5B57;[4,8,16]&#xFF0C;&#x5B83;&#x4E5F;&#x5B58;&#x5728;&#x65E7;&#x7684;&#x6570;&#x636E;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x66F4;&#x65B0;&#x9009;&#x62E9;&#x5305;&#x542B;3 &#x4E2A;DIV&#x5143;&#x7D20;&#x3002;&#x6BD4;&#x65B9;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x79BB;&#x5F00;&#x8FD9;&#x4E9B;&#x5143;&#x7D20;&#x539F;&#x6837;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9E;&#x4F8B;&#x5316;&#x5E76;&#x4F7F;&#x7528;enter&#x9009;&#x62E9;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x5143;&#x7D20;[1,2,32]&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">div.enter().append(&quot;div&quot;)</div><div class="line">    .text(function(d) { return d; });</div></pre></td></tr></table></figure></p>
+<p>&#x540C;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x9000;&#x51FA;&#x7684;&#x5143;&#x7D20;[15, 23, 42]&#xFF1A; div.exit().remove();</p>
+<p>&#x73B0;&#x5728;&#xFF0C;&#x6587;&#x6863;body&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;4&lt;/div&gt;</div><div class="line">&lt;div&gt;8&lt;/div&gt;</div><div class="line">&lt;div&gt;16&lt;/div&gt;</div><div class="line">&lt;div&gt;1&lt;/div&gt;</div><div class="line">&lt;div&gt;2&lt;/div&gt;</div><div class="line">&lt;div&gt;32&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x6CE8;&#x610F;&#xFF0C;DOM&#x5143;&#x7D20;&#x73B0;&#x5728;&#x662F;&#x4E71;&#x5E8F;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x9009;&#x62E9;&#x7D22;&#x5F15;i&#xFF08;&#x64CD;&#x4F5C;&#x51FD;&#x6570;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF09;&#xFF0C;&#x5C06;&#x6B63;&#x786E;&#x5730;&#x4E0E;&#x65B0;&#x6570;&#x636E;&#x6570;&#x7EC4;&#x76F8;&#x5339;&#x914D;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x7D22;&#x5F15;&#x5C5E;&#x6027;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d3.selectAll(&quot;div&quot;).attr(&quot;index&quot;, function(d, i) { return i; });</div></pre></td></tr></table></figure></p>
+<p>&#x7ED3;&#x679C;&#x662F;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div index=&quot;2&quot;&gt;4&lt;/div&gt;</div><div class="line">&lt;div index=&quot;3&quot;&gt;8&lt;/div&gt;</div><div class="line">&lt;div index=&quot;4&quot;&gt;16&lt;/div&gt;</div><div class="line">&lt;div index=&quot;0&quot;&gt;1&lt;/div&gt;</div><div class="line">&lt;div index=&quot;1&quot;&gt;2&lt;/div&gt;</div><div class="line">&lt;div index=&quot;5&quot;&gt;32&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5728;&#x6587;&#x6863;&#x904D;&#x5386;&#xFF0C;&#x4EE5;&#x5339;&#x914D;&#x9009;&#x62E9;&#x6570;&#x636E;&#x987A;&#x5E8F;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;sort&#x6216;&#x8005;order&#x3002;</p>
+<h2 id="selection-filter-selector"><a href="#selection-filter-selector" class="headerlink" title="selection.filter(selector)"></a>selection.filter(selector)</h2><p>&#x8FC7;&#x6EE4;&#x9009;&#x62E9;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x9009;&#x62E9;&#x53EA;&#x5305;&#x542B;&#x5176;&#x6307;&#x5B9A;&#x7684;selector&#x662F;true&#x7684;&#x5143;&#x7D20;&#x3002;selector&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x4F5C;&#x4E3A;&#x9009;&#x62E9;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x201C;.foo&#x201D;&#x3002;&#x548C;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x7B26;&#x4E00;&#x6837;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x88AB;&#x4F20;&#x9012;&#x5F53;&#x524D;&#x6570;&#x636E;d&#x548C;&#x7D22;&#x5F15;i&#xFF0C;&#x4EE5;&#x53CA;this&#x4E0A;&#x4E0B;&#x6587;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x7684;DOM&#x5143;&#x7D20;&#x3002;&#x8FC7;&#x6EE4;&#x5668;&#x5E94;&#x8BE5;&#x53EA;&#x5728;&#x9009;&#x62E9;&#x4E0E;DOM&#x5143;&#x7D20;&#x7ED1;&#x5B9A;&#x7684;&#x65F6;&#x5019;&#x3002;&#x4F8B;&#x5982;&#xFF1A;&#x4ECE;append&#x6216;insert&#x3002;&#x53EA;&#x7ED1;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x548C;&#x6570;&#x636E;&#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x96C6;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;data&#x53C2;&#x6570;&#x4E2D;&#x8C03;&#x7528;&#x5185;&#x7F6E;&#x7684;&#x6570;&#x7EC4;&#x8FC7;&#x6EE4;&#x5668;filter&#x3002;&#x50CF;&#x5185;&#x7F6E;&#x51FD;&#x6570;&#x4E00;&#x6837;&#xFF0C;D3&#x7684;&#x8FC7;&#x6EE4;&#x5668;&#x4E0D;&#x4F1A;&#x5728;&#x8FD4;&#x56DE;&#x9009;&#x62E9;&#x4E2D;&#x4FDD;&#x7559;&#x539F;&#x6765;&#x7684;&#x9009;&#x62E9;&#x7684;&#x7D22;&#x5F15;&#xFF1B;&#x8FD4;&#x56DE;&#x79FB;&#x9664;&#x5143;&#x7D20;&#x7684;&#x526F;&#x672C;&#x3002;&#x5982;&#x679C;&#x60A8;&#x60F3;&#x4FDD;&#x7559;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x4F7F;&#x7528;select&#x4EE3;&#x66FF;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x8981;&#x9009;&#x62E9;&#x5947;&#x6570;&#x7D22;&#x5F15;&#xFF08;&#x76F8;&#x5BF9;&#x4E8E;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x7684;&#x7D22;&#x5F15;&#xFF09;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var odds = selection.select(function(d, i) { return i &amp; 1 ? this : null; });</div></pre></td></tr></table></figure></p>
+<p>&#x7B49;&#x4EF7;&#x5730;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x8FC7;&#x6EE4;&#x5668;&#x51FD;&#x6570;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var odds = selection.filter(function(d, i) { return i &amp; 1; });</div></pre></td></tr></table></figure></p>
+<p>&#x6216;&#x8FC7;&#x6EE4;&#x9009;&#x62E9;&#x5668;&#xFF08;&#x6CE8;&#x610F;&#xFF1A;nth-child&#x4F2A;&#x7C7B;&#x662F;&#x4E00;&#x5F00;&#x59CB;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x7684;&#x7D22;&#x5F15;&#xFF09;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var odds = selection.filter(&quot;:nth-child(even)&quot;);</div></pre></td></tr></table></figure></p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x9009;&#x62E9;&#x6216;&#x8FC7;&#x6EE4;&#x5668;&#x64CD;&#x4F5C;&#x7B26;&#x5E94;&#x7528;&#x5230;&#x5143;&#x7D20;&#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x96C6;&#x4E0A;&#x3002;</p>
+<h2 id="selection-datum-value"><a href="#selection-datum-value" class="headerlink" title="selection.datum([value])"></a>selection.datum([value])</h2><p>&#x83B7;&#x53D6;&#x6216;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x7ED1;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x3002;&#x4E0D;&#x50CF;selection.data&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x4E0D;&#x8BA1;&#x7B97;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#xFF08;&#x5E76;&#x56E0;&#x6B64;&#x4E0D;&#x8BA1;&#x7B97;enter&#x548C;exit&#x7684;&#x9009;&#x62E9;&#xFF09;&#x3002;&#x6B64;&#x65B9;&#x6CD5;&#x5728;selection.property&#x4E4B;&#x4E0A;&#x5B9E;&#x73B0;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">d3.selection.prototype.datum = function(value) {</div><div class="line">  return arguments.length &lt; 1</div><div class="line">      ? this.property(&quot;__data__&quot;)</div><div class="line">      : this.property(&quot;__data__&quot;, value);</div><div class="line">};</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;value&#xFF0C;&#x5C31;&#x4E3A;&#x6240;&#x6709;&#x9009;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x8BBE;&#x7F6E;&#x5143;&#x7D20;&#x7684;&#x7ED1;&#x5B9A;&#x6570;&#x636E;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5143;&#x7D20;&#x88AB;&#x7ED9;&#x4E88;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5982;&#x679C;value&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x8BE5;&#x51FD;&#x6570;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x8BA1;&#x7B97;&#xFF0C;&#x88AB;&#x4F20;&#x9012;&#x4EE5;&#x524D;&#x7684;&#x6570;&#x636E;d&#x4E0E;&#x5F53;&#x524D;&#x7D22;&#x5F15;i&#xFF0C;&#x4F7F;&#x7528;this&#x4E0A;&#x4E0B;&#x6587;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x7684;DOM&#x5143;&#x7D20;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x4E4B;&#x540E;&#x88AB;&#x7528;&#x6765;&#x786E;&#x5B9A;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6570;&#x636E;&#x3002;null&#x503C;&#x5C06;&#x5220;&#x9664;&#x7ED1;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x3002;&#x8BE5;&#x64CD;&#x4F5C;&#x6570;&#x5BF9;&#x7D22;&#x5F15;&#x6CA1;&#x6709;&#x5F71;&#x54CD;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;value&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5728;&#x9009;&#x62E9;&#x4E2D;&#x7ED1;&#x5B9A;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#x7684;&#x5143;&#x7D20;&#x7684;&#x6570;&#x636E;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x4F60;&#x77E5;&#x9053;&#x9009;&#x62E9;&#x53EA;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8FD9;&#x901A;&#x5E38;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x6B64;&#x65B9;&#x6CD5;&#x662F;&#x4EE5;&#x524D;&#x6240;&#x8C13;&#x7684;&#x201C;map&#x201D;&#x3002;&#x65E7;&#x540D;&#x5DF2;&#x88AB;&#x5F03;&#x7528;&#x3002;</p>
+<p>datum &#x65B9;&#x6CD5;&#x7528;D3&#x8BBF;&#x95EE;HTML5&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;&#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x7ED9;&#x5B9A;&#x4E0B;&#x5217;&#x5143;&#x7D20;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;list&quot;&gt;</div><div class="line">  &lt;li data-username=&quot;shawnbot&quot;&gt;Shawn Allen&lt;/li&gt;</div><div class="line">  &lt;li data-username=&quot;mbostock&quot;&gt;Mike Bostock&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x516C;&#x5F00;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6570;&#x636E;&#x4F5C;&#x4E3A;&#x5185;&#x7F6E;&#x7684;dataset&#x5C5E;&#x6027;&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x5C5E;&#x6027;D3&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">selection.datum(function() { return this.dataset; })</div></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x6309;&#x7167;&#x7528;&#x6237;&#x540D;&#x6392;&#x5E8F;&#x5143;&#x7D20;&#x3002;&#x793A;&#x4F8B;</p>
+<h2 id="selection-sort-comparator"><a href="#selection-sort-comparator" class="headerlink" title="selection.sort([comparator])"></a>selection.sort([comparator])</h2><p>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;comparator&#x51FD;&#x6570;&#x5BF9;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x5143;&#x7D20;&#x6392;&#x5E8F;&#x3002;&#x6BD4;&#x8F83;&#x5668;&#x51FD;&#x6570;&#x9ED8;&#x8BA4;&#x4E3A;d3.ascending&#xFF0C;&#x901A;&#x8FC7;&#x4F20;&#x9012;&#x4E24;&#x4E2A;&#x6570;&#x636E;&#x5143;&#x7D20;a&#x548C;b&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4EFB;&#x4E00;&#x8D1F;&#x7684;&#xFF0C;&#x6B63;&#x7684;&#xFF0C;&#x6216;&#x96F6;&#x503C;&#x3002;&#x5982;&#x679C;&#x4E3A;&#x8D1F;&#xFF0C;&#x5219;a&#x5E94;&#x8BE5;&#x5728;b&#x4E4B;&#x524D;&#xFF1B;&#x5982;&#x679C;&#x4E3A;&#x6B63;&#xFF0C;&#x5219;a&#x5E94;&#x8BE5;&#x4E3A;b&#x540E;&#xFF1B;&#x5426;&#x5219;a&#x548C;b&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x76F8;&#x7B49;&#x7684;&#x987A;&#x5E8F;&#x662F;&#x4EFB;&#x610F;&#x7684;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x8FD9;&#x79CD;&#x6392;&#x5E8F;&#x662F;&#x4E0D;&#x4FDD;&#x8BC1;&#x662F;&#x7A33;&#x5B9A;&#x7684;&#xFF1B;&#x7136;&#x800C;&#xFF0C;&#x5B83;&#x4FDD;&#x8BC1;&#x4E0E;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x7F6E;&#x7684;&#x6570;&#x7EC4;&#x6392;&#x5E8F;&#x65B9;&#x6CD5;&#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<h2 id="selection-order"><a href="#selection-order" class="headerlink" title="selection.order()"></a>selection.order()</h2><p>&#x91CD;&#x65B0;&#x63D2;&#x5165;&#x5143;&#x7D20;&#x5230;&#x6587;&#x6863;&#x8FD9;&#x6837;&#x6587;&#x6863;&#x987A;&#x5E8F;&#x9009;&#x4E0E;&#x62E9;&#x987A;&#x5E8F;&#x5C31;&#x76F8;&#x5339;&#x914D;&#x3002;&#x8FD9;&#x7B49;&#x540C;&#x4E8E;&#x8C03;&#x7528;sort()&#x5982;&#x679C;&#x6570;&#x636E;&#x5DF2;&#x7ECF;&#x6392;&#x5E8F;&#xFF0C;&#x4F46;&#x8981;&#x5FEB;&#x5F97;&#x591A;&#x3002;</p>
+<h1 id="&#x52A8;&#x753B;&#x548C;&#x4EA4;&#x4E92;"><a href="#&#x52A8;&#x753B;&#x548C;&#x4EA4;&#x4E92;" class="headerlink" title="&#x52A8;&#x753B;&#x548C;&#x4EA4;&#x4E92;"></a>&#x52A8;&#x753B;&#x548C;&#x4EA4;&#x4E92;</h1><h2 id="selection-on-type-listener-capture"><a href="#selection-on-type-listener-capture" class="headerlink" title="selection.on(type[, listener[, capture]])"></a>selection.on(type[, listener[, capture]])</h2><p>&#x5728;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x7C7B;&#x578B;type&#xFF0C;&#x6DFB;&#x52A0;&#x6216;&#x5220;&#x9664;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;listener &#x3002;type&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x7684;&#x540D;&#x79F0;&#xFF0C;&#x5982;&#x201C;&#x70B9;&#x51FB;&#x201D;&#xFF0C;&#x201C;&#x9F20;&#x6807;&#x60AC;&#x505C;&#x201D;&#xFF0C;&#x6216;&#x201C;&#x63D0;&#x4EA4;&#x201D;&#x3002;&#x57FA;&#x672C;&#x4E0A;&#x652F;&#x6301;&#x4EFB;&#x4F55;DOM&#x4E8B;&#x4EF6;&#x3002;&#x6709;&#x5173;D3&#x652F;&#x6301;&#x7684;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x7684;&#x66F4;&#x591A;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x67E5;&#x770B;Mozilla&#x6216;Stackoverflow&#x3002;&#x6307;&#x5B9A;&#x7684;listener &#x4E0E;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x7B26;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x65B9;&#x5F0F;&#x76F8;&#x540C;&#xFF0C;&#x88AB;&#x4F20;&#x9012;&#x7684;&#x5F53;&#x524D;&#x6570;&#x636E;d&#x548C;&#x7D22;&#x5F15;i&#x4E0E;this&#x4E0A;&#x4E0B;&#x6587;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x7684;DOM&#x5143;&#x7D20;&#x3002;&#x4E3A;&#x4E86;&#x5728;&#x4FA6;&#x542C;&#x5668;&#x5185;&#x8BBF;&#x95EE;&#x5F53;&#x524D;&#x4E8B;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528;&#x5168;&#x5C40;&#x51FD;&#x6570;d3.event&#x3002;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x5668;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C06;&#x88AB;&#x5FFD;&#x7565;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6240;&#x9009;&#x62E9;&#x7684;&#x5143;&#x7D20;&#x76F8;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5DF2;&#x7ECF;&#x6CE8;&#x518C;&#x4E86;&#xFF0C;&#x65B0;&#x7684;&#x4FA6;&#x542C;&#x52A0;&#x5165;&#x4E4B;&#x524D;&#x7684;&#x73B0;&#x6709;&#x4FA6;&#x542C;&#x88AB;&#x9664;&#x53BB;&#x3002;&#x4E3A;&#x6CE8;&#x518C;&#x76F8;&#x540C;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x7684;&#x591A;&#x4E2A;&#x76D1;&#x542C;&#x5668;&#xFF0C;&#x8BE5;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8DDF;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF0C;&#x5982;&#x201C;click.foo&#x201D;&#x548C;&#x201C;click.bar&#x201D;&#x3002; &#x8981;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x76D1;&#x542C;&#x5668;&#xFF0C;&#x4F20;&#x9012;null&#x7ED9;listener&#xFF0C;&#x5220;&#x9664;&#x7279;&#x5B9A;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x6240;&#x6709;&#x76D1;&#x542C;&#xFF0C;&#x4F20;&#x9012;null&#x7ED9;listener&#xFF0C;&#x6307;&#x5B9A;.type&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5982;&#xFF1A;selection.on(&#x201C;.foo&#x201D;, null)&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x6355;&#x83B7;capture&#x6807;&#x5FD7;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#xFF0C;&#x5BF9;&#x5E94;&#x4E8E;W3C&#x7684;useCapture&#x6807;&#x5FD7;&#xFF1A;&#x201C;&#x5F00;&#x59CB;&#x6355;&#x83B7;&#x540E;&#xFF0C;&#x6240;&#x6709;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x4E8B;&#x4EF6;&#x5C06;&#x88AB;&#x5206;&#x6D3E;&#x5230;&#x6CE8;&#x518C;&#x7684;EventListener&#x5728;&#x88AB;&#x5206;&#x6D3E;&#x5230;&#x4E8B;&#x4EF6;&#x6811;&#x4EFB;&#x4F55;EventTargets&#x4E0B;&#xFF0C;&#x4E8B;&#x4EF6;&#x662F;&#x6CBF;&#x7740;&#x6811;&#x5411;&#x4E0A;&#x5192;&#x6CE1;&#x800C;&#x4E0D;&#x4F1A;&#x89E6;&#x53D1;&#x4E00;&#x4E2A;EventListener&#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x6355;&#x83B7;&#x201D;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;&#x76D1;&#x542C;&#x5668;&#xFF0C;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#xFF08;&#x5982;&#x679C;&#x6709;&#xFF09;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x5206;&#x914D;&#x7684;&#x76D1;&#x542C;&#x5668;&#x3002;</p>
+<h2 id="d3-event"><a href="#d3-event" class="headerlink" title="d3.event"></a>d3.event</h2><p>&#x5B58;&#x50A8;&#x5F53;&#x524D;&#x7684;&#x4E8B;&#x4EF6;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x3002;&#x8FD9;&#x4E2A;&#x5168;&#x5C40;&#x51FD;&#x6570;&#x662F;&#x5728;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x5668;&#x56DE;&#x8C03;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;on&#x64CD;&#x4F5C;&#x7B26;&#x6CE8;&#x518C;&#x7684;&#x3002;&#x5F53;&#x76D1;&#x542C;&#x5668;&#x5728;finally&#x5757;&#x88AB;&#x901A;&#x77E5;&#x540E;&#x5F53;&#x524D;&#x4E8B;&#x4EF6;&#x88AB;&#x91CD;&#x7F6E;&#x3002;&#x8FD9;&#x4F7F;&#x4FA6;&#x542C;&#x5668;&#x51FD;&#x6570;&#x4E0E;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x7B26;&#x51FD;&#x6570;&#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x4F20;&#x9012;&#x5F53;&#x524D;&#x6570;&#x636E;d&#x548C;&#x7D22;&#x5F15;i&#x3002; d3.event&#x5BF9;&#x8C61;&#x662F;DOM&#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x5B9E;&#x73B0;&#x4E86;&#x6807;&#x51C6;&#x4E8B;&#x4EF6;&#x5B57;&#x6BB5;&#xFF0C;&#x50CF;&#x65F6;&#x95F4;&#x6233;timeStamp&#x548C;&#x952E;&#x4EE3;&#x7801;keyCode&#xFF0C;&#x4EE5;&#x53CA;preventDefault()&#x65B9;&#x6CD5;&#x548C;&#x7684;stopPropagation()&#x65B9;&#x6CD5;&#x3002;&#x5F53;&#x7136;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x539F;&#x751F;&#x4E8B;&#x4EF6;&#x7684;pageX and pageY&#xFF0C;&#x5B83;&#x5F80;&#x5F80;&#x66F4;&#x65B9;&#x4FBF;&#x8F6C;&#x53D8;&#x4E8B;&#x4EF6;&#x4F4D;&#x7F6E;&#x4E3A;&#x63A5;&#x6536;&#x8BE5;&#x4E8B;&#x4EF6;&#x5BB9;&#x5668;&#x7684;&#x5C40;&#x90E8;&#x5750;&#x6807;&#x7CFB;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5728;&#x7F51;&#x9875;&#x7684;&#x6B63;&#x5E38;&#x6D41;&#x7A0B;&#x5D4C;&#x5165;SVG&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x60F3;&#x4E8B;&#x4EF6;&#x7684;&#x4F4D;&#x7F6E;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;SVG&#x56FE;&#x50CF;&#x7684;&#x5DE6;&#x4E0A;&#x89D2;&#x7684;&#x3002;&#x5982;&#x679C;&#x60A8;&#x7684;SVG&#x5305;&#x542B;&#x8F6C;&#x6362;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x80FD;&#x60F3;&#x77E5;&#x9053;&#x4E8B;&#x4EF6;&#x7684;&#x76F8;&#x5BF9;&#x4E8E;&#x90A3;&#x4E9B;&#x53D8;&#x6362;&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x6807;&#x51C6;&#x9F20;&#x6807;&#x6307;&#x9488;&#x4F7F;&#x7528;d3.mouse&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;d3.touches&#x7528;&#x5728;iOS&#x591A;&#x70B9;&#x89E6;&#x63A7;&#x4E8B;&#x4EF6;&#x4E0A;&#x3002;</p>
+<h2 id="d3-mouse-Container"><a href="#d3-mouse-Container" class="headerlink" title="d3.mouse(Container)"></a>d3.mouse(Container)</h2><p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;d3.event&#x76F8;&#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x7684;&#x5BB9;&#x5668;&#x7684;x&#x548C;y&#x5750;&#x6807;&#xFF0C;&#x3002;&#x8BE5;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;HTML&#x6216;SVG&#x5BB9;&#x5668;&#x5143;&#x7D20;&#xFF0C;&#x5982;svg:g&#x6216;svg:svg&#x3002;&#x8BE5;&#x5750;&#x6807;&#x8FD4;&#x56DE;&#x4E3A;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6570;&#x7EC4;[x, y]&#x3002;</p>
+<h2 id="d3-touch-container-touches-identifier"><a href="#d3-touch-container-touches-identifier" class="headerlink" title="d3.touch(container[, touches], identifier)"></a>d3.touch(container[, touches], identifier)</h2><p>&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x6807;&#x8BC6;&#x7B26;&#x89E6;&#x6478;&#x5F53;&#x524D;d3.event&#x76F8;&#x5E94;&#x7684;x&#x548C;y&#x5750;&#x6807;&#xFF0C;&#x76F8;&#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x5BB9;&#x5668;&#x3002;&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;touches&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x4E8B;&#x4EF6;&#x7684;changedTouches&#x3002;&#x8BE5;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;HTML&#x6216;SVG&#x5BB9;&#x5668;&#x5143;&#x4EF6;&#xFF0C;&#x5982;&#x4E00;&#x4E2A;&#x7684;svg:g&#x6216;svg:svg&#x3002;&#x5750;&#x6807;&#x88AB;&#x8FD4;&#x56DE;&#x4E3A;&#x4E24;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#x7684;&#x6570;&#x7EC4;[ [ x1, y1], [ x2, y2], &#x2026; ]&#x3002;&#x5982;&#x679C;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x6807;&#x8BC6;&#x7B26;touches&#x6CA1;&#x6709;&#x63A5;&#x89E6;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null&#xFF1B;&#x8FD9;&#x5BF9;&#x4E8E;&#x5FFD;&#x7565;touchmove&#x90A3;&#x4E9B;&#x53EA;&#x662F;touches&#x79FB;&#x52A8;&#x4E86;&#x7684;&#x4E8B;&#x4EF6;&#x662F;&#x5F88;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<h2 id="d3-touches-container-touches"><a href="#d3-touches-container-touches" class="headerlink" title="d3.touches(container[, touches])"></a>d3.touches(container[, touches])</h2><p>&#x8FD4;&#x56DE;&#x4E0E;&#x5F53;&#x524D;d3.event&#x76F8;&#x5173;&#x8054;&#x7684;&#x6BCF;&#x4E2A;&#x89E6;&#x6478;x&#x548C;y&#x5750;&#x6807;&#xFF0C;&#x57FA;&#x4E8E;touches&#x5C5E;&#x6027;&#xFF0C;&#x76F8;&#x5BF9;&#x4E8E;&#x6307;&#x5B9A;&#x7684;&#x5BB9;&#x5668;&#x4E2D;&#x3002;&#x8BE5;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;HTML&#x6216;SVG&#x5BB9;&#x5668;&#x5143;&#x7D20;&#xFF0C;&#x5982;svg:g &#x6216; svg:svg&#x3002;&#x5750;&#x6807;&#x8FD4;&#x56DE;&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x6570;&#x7EC4;&#x7684;&#x6570;&#x7EC4;[ [ x1, y1], [ x2, y2], &#x2026; ]&#x3002;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x89E6;&#x6478;&#xFF0C;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x89E6;&#x6478;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;touches&#x65F6;&#xFF0C;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x4E8B;&#x4EF6;&#x7684;touches&#x5C5E;&#x6027;&#x3002;</p>
+<h2 id="selection-transition-name"><a href="#selection-transition-name" class="headerlink" title="selection.transition([name])"></a>selection.transition([name])</h2><p>&#x5F00;&#x59CB;&#x4E3A;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x8FC7;&#x6E21;&#x3002;&#x8F6C;&#x6362;&#x7684;&#x884C;&#x4E3A;&#x5F88;&#x50CF;&#x9009;&#x62E9;&#xFF0C;&#x9664;&#x4E86;&#x64CD;&#x4F5C;&#x7B26;&#x52A8;&#x753B;&#x5E73;&#x6ED1;&#x7684;&#x968F;&#x7740;&#x65F6;&#x95F4;&#x7684;&#x63A8;&#x79FB;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x77AC;&#x95F4;&#x5B8C;&#x6210;&#x3002;</p>
+<h2 id="selection-interrupt-name"><a href="#selection-interrupt-name" class="headerlink" title="selection.interrupt([name])"></a>selection.interrupt([name])</h2><p>&#x7ACB;&#x5373;&#x4E2D;&#x65AD;&#x5F53;&#x524D;&#x7684;&#x8FC7;&#x6E21;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;&#x3002;&#x4E0D;&#x4F1A;&#x53D6;&#x6D88;&#x4EFB;&#x4F55;&#x5C1A;&#x672A;&#x542F;&#x52A8;&#x7684;&#x9884;&#x5B9A;&#x7684;&#x8F6C;&#x53D8;&#x3002;&#x6700;&#x597D;&#x8981;&#x53D6;&#x6D88;&#x539F;&#x5B9A;&#x8FC7;&#x6E21;&#xFF0C;&#x7B80;&#x5355;&#x5730;&#x521B;&#x5EFA;&#x4E2D;&#x65AD;&#x5F53;&#x524D;&#x7684;&#x8FC7;&#x6E21;&#x540E;&#xFF0C;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x96F6;&#x5EF6;&#x8FDF;&#x8FC7;&#x6E21;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">selection</div><div class="line">    .interrupt() // &#x53D6;&#x6D88;&#x5F53;&#x524D;&#x8FC7;&#x6E21;</div><div class="line">    .transition(); //&#x62A2;&#x5360;&#x4EFB;&#x4F55;&#x9884;&#x5B9A;&#x7684;&#x8F6C;&#x6362;</div></pre></td></tr></table></figure></p>
+<h1 id="&#x5B50;&#x9009;&#x62E9;"><a href="#&#x5B50;&#x9009;&#x62E9;" class="headerlink" title="&#x5B50;&#x9009;&#x62E9;"></a>&#x5B50;&#x9009;&#x62E9;</h1><p>&#x9876;&#x5C42;&#x7684;select&#x65B9;&#x6CD5;&#x67E5;&#x8BE2;&#x6574;&#x4E2A;&#x6587;&#x6863;&#xFF0C;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x7684;select&#x548C;selectAll&#x64CD;&#x4F5C;&#x7B26;&#x9650;&#x5B9A;&#x67E5;&#x8BE2;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x5143;&#x7D20;&#x7684;&#x540E;&#x4EE3;&#xFF1B;&#x6211;&#x4EEC;&#x79F0;&#x4E4B;&#x4E3A;&#x201C;&#x90E8;&#x5206;&#x9009;&#x62E9;&#x201D;&#x3002;&#x4F8B;&#x5982;&#xFF0C;d3.selectAll(&#x201C;p&#x201D;).select(&#x201C;b&#x201D;)&#x8FD4;&#x56DE;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;&#x6BB5;&#x843D;(&#x201C;p&#x201D;)&#x5143;&#x7D20;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;bold(&#x201C;b&#x201D;)&#x5143;&#x7D20;&#x3002;&#x90E8;&#x5206;&#x9009;&#x62E9;&#x901A;&#x8FC7;selectAll&#x901A;&#x8FC7;&#x7956;&#x5148;&#x5206;&#x7EC4;&#x5143;&#x7D20;&#x3002;&#x56E0;&#x6B64;&#xFF0C;d3.selectAll(&#x201C;p&#x201D;).selectAll(&#x201C;b&#x201D;)&#x3002;&#x901A;&#x8FC7;&#x6BB5;&#x843D;&#x5206;&#x7EC4;&#x800C;d3.selectAll(&#x201C;p b&#x201D;) &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x6241;&#x5E73;&#x7684;&#x9009;&#x62E9;&#x3002;&#x90E8;&#x5206;&#x9009;&#x62E9;&#x901A;&#x8FC7;select&#x662F;&#x76F8;&#x4F3C;&#x7684;&#xFF0C;&#x4F46;&#x4FDD;&#x7559;&#x4E86;&#x56E2;&#x4F53;&#x548C;&#x4F20;&#x64AD;&#x6570;&#x636E;&#x3002;&#x5206;&#x7EC4;&#x8D77;&#x5728;&#x6570;&#x636E;&#x8FDE;&#x63A5;&#x4E2D;&#x8D77;&#x91CD;&#x8981;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x548C;&#x529F;&#x80FD;&#x6027;&#x64CD;&#x4F5C;&#x7B26;&#x53EF;&#x4F9D;&#x8D56;&#x4E8E;&#x5176;&#x7EC4;&#x5185;&#x7684;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x7684;&#x6570;&#x503C;&#x7D22;&#x5F15;&#x3002;</p>
+<h2 id="selection-select-selector"><a href="#selection-select-selector" class="headerlink" title="selection.select(selector)"></a>selection.select(selector)</h2><p>&#x5BF9;&#x5F53;&#x524D;&#x9009;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x9009;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x7279;&#x5B9A;&#x7684;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x7B26;&#x4E32;selector&#x7684;&#x5B50;&#x4EE3;&#x5143;&#x7D20;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x6CA1;&#x6709;&#x5143;&#x7D20;&#x5339;&#x914D;&#x7279;&#x5B9A;&#x7684;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x5F53;&#x524D;&#x7D22;&#x5F15;&#x5904;&#x7684;&#x5143;&#x7D20;&#x5728;&#x8FD4;&#x56DE;&#x7684;&#x9009;&#x62E9;&#x4E2D;&#x5C06;&#x662F;&#x7A7A;&#x503C;null&#x3002;&#x8FD0;&#x7B97;&#x7B26;&#xFF08;&#x9664;&#x4E86;data&#xFF09;&#x81EA;&#x52A8;&#x8DF3;&#x8FC7;null&#x5143;&#x7D20;&#xFF0C;&#x4ECE;&#x800C;&#x4FDD;&#x6301;&#x73B0;&#x6709;&#x9009;&#x62E9;&#x7684;&#x7D22;&#x5F15;&#x3002;&#x5982;&#x679C;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x5177;&#x6709;&#x76F8;&#x5173;&#x8054;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x8BE5;&#x6570;&#x636E;&#x7531;&#x8FD4;&#x56DE;&#x7684;&#x5B50;&#x9009;&#x62E9;&#x7EE7;&#x627F;&#xFF0C;&#x5E76;&#x4E14;&#x81EA;&#x52A8;&#x7ED1;&#x5B9A;&#x5230;&#x65B0;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x3002;&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x5143;&#x7D20;&#x5339;&#x914D;&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x53EA;&#x6709;&#x5728;&#x6587;&#x6863;&#x904D;&#x5386;&#x987A;&#x5E8F;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#x4F1A;&#x88AB;&#x9009;&#x4E2D;&#x3002;&#x9009;&#x62E9;&#x5668;&#x4E5F;&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x6216;&#x8005;null&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#xFF09;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6307;&#x5B9A;&#x7684;&#x9009;&#x62E9;&#x5668;&#x4EE5;&#x548C;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x51FD;&#x6570;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x88AB;&#x4F20;&#x9012;&#x7684;&#x5F53;&#x524D;&#x6570;&#x636E;d&#x548C;&#x7D22;&#x5F15;i&#xFF0C;&#x4E0E;this&#x4E0A;&#x4E0B;&#x6587;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x7684;DOM&#x5143;&#x7D20;&#x3002;</p>
+<h2 id="selection-selectAll-selector"><a href="#selection-selectAll-selector" class="headerlink" title="selection.selectAll(selector)"></a>selection.selectAll(selector)</h2><p>&#x5BF9;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x9009;&#x53D6;&#x5339;&#x914D;&#x6307;&#x5B9A;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x540E;&#x4EE3;&#x5143;&#x7D20;&#x3002;&#x8FD4;&#x56DE;&#x7684;&#x9009;&#x62E9;&#x662F;&#x901A;&#x8FC7;&#x5728;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x7956;&#x5148;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5143;&#x7D20;&#x548C;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x7684;&#x6307;&#x5B9A;&#x9009;&#x62E9;&#x5668;&#x76F8;&#x5339;&#x914D;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x9009;&#x62E9;&#x4E2D;&#x5F53;&#x524D;&#x7D22;&#x5F15;&#x5904;&#x7684;&#x7EC4;&#x5C06;&#x662F;null&#x3002;&#x90E8;&#x5206;&#x9009;&#x53D6;&#x4E0D;&#x4ECE;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7EE7;&#x627F;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x6570;&#x636E;&#x503C;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x5E26;&#x6709;&#x7684;&#x7956;&#x5148;&#x8282;&#x70B9;&#x7684;&#x6570;&#x636E;d&#x548C;&#x7EC4;&#x7D22;&#x5F15;i&#x6765;&#x786E;&#x5B9A;&#x90E8;&#x5206;&#x9009;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x3002;</p>
+<p>&#x901A;&#x8FC7;selectAll&#x7684;&#x5206;&#x7EC4;&#x4E5F;&#x5C06;&#x5F71;&#x54CD;&#x540E;&#x7EED;&#x8FDB;&#x5165;&#x7684;&#x5360;&#x4F4D;&#x8282;&#x70B9;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4E3A;&#x8FFD;&#x52A0;&#x8FDB;&#x5165;&#x7684;&#x8282;&#x70B9;&#x6307;&#x5B9A;&#x7236;&#x8282;&#x70B9;&#xFF0C;&#x4F7F;&#x7528;select&#x540E;&#x7D27;&#x8DDF;selectAll&#xFF1A;</p>
+<p><code>d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)</code><br>&#x60A8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x68C0;&#x67E5;&#x5404;&#x7EC4;&#x6570;&#x636E;&#x7684;parentNode&#x5C5E;&#x6027;&#x67E5;&#x770B;&#x6BCF;&#x4E2A;&#x7EC4;&#x7684;&#x7236;&#x8282;&#x70B9;&#xFF0C;&#x4F8B;&#x5982;selection[0].parentNode&#x3002;</p>
+<p>&#x9009;&#x62E9;&#x5668;&#x4E5F;&#x53EF;&#x4EE5;&#x88AB;&#x6307;&#x5B9A;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8FD4;&#x56DE;&#x5143;&#x7D20;&#x7684;&#x6570;&#x7EC4;&#xFF08;&#x6216;&#x8282;&#x70B9;&#x5217;&#x8868;NodeList&#xFF09;&#xFF0C;&#x6216;&#x8005;&#x7A7A;&#x6570;&#x7EC4;&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#xFF09;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6307;&#x5B9A;&#x7684;&#x9009;&#x62E9;&#x5668;&#x4EE5;&#x548C;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x51FD;&#x6570;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x88AB;&#x4F20;&#x9012;&#x7684;&#x5F53;&#x524D;&#x6570;&#x636E;d&#x548C;&#x7D22;&#x5F15;i&#xFF0C;&#x4E0E;this&#x4E0A;&#x4E0B;&#x6587;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x7684;DOM&#x5143;&#x7D20;&#x3002;</p>
+<h1 id="&#x63A7;&#x5236;"><a href="#&#x63A7;&#x5236;" class="headerlink" title="&#x63A7;&#x5236;"></a>&#x63A7;&#x5236;</h1><p>&#x5BF9;&#x4E8E;&#x9AD8;&#x7EA7;&#x7528;&#x6CD5;&#xFF0C;D3&#x6709;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x7528;&#x6237;&#x63A7;&#x5236;&#x6D41;&#x64CD;&#x4F5C;&#x7B26;&#x3002;</p>
+<h2 id="selection-each-function"><a href="#selection-each-function" class="headerlink" title="selection.each(function)"></a>selection.each(function)</h2><p>&#x4E3A;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x8C03;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4F20;&#x9012;&#x5F53;&#x524D;&#x6570;&#x636E;d&#x548C;&#x7D22;&#x5F15;i&#xFF0C;&#x4E0E;&#x5F53;&#x524D;&#x7684;DOM&#x5143;&#x7D20;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x51E0;&#x4E4E;&#x88AB;&#x6240;&#x6709;&#x7684;&#x5176;&#x4ED6;&#x64CD;&#x4F5C;&#x7B26;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x8C03;&#x7528;&#x4EFB;&#x610F;&#x4EE3;&#x7801;&#x4E3A;&#x6BCF;&#x4E2A;&#x9009;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x3002;each&#x64CD;&#x4F5C;&#x7B26;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5904;&#x7406;&#x9012;&#x5F52;&#x7684;&#x9009;&#x62E9;&#xFF0C;&#x901A;&#x8FC7;&#x5728;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x5185;&#x4F7F;&#x7528;d3.select(this)&#x3002;</p>
+<h2 id="selection-call-function-arguments&#x2026;"><a href="#selection-call-function-arguments&#x2026;" class="headerlink" title="selection.call(function[, arguments&#x2026;])"></a>selection.call(function[, arguments&#x2026;])</h2><p>&#x8C03;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#x4E00;&#x6B21;&#xFF0C;&#x901A;&#x8FC7;&#x5728;&#x5F53;&#x524D;&#x7684;&#x9009;&#x62E9;&#x4EE5;&#x53CA;&#x4EFB;&#x4F55;&#x53EF;&#x9009;&#x53C2;&#x6570;&#x3002;&#x65E0;&#x8BBA;&#x6307;&#x5B9A;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;call&#x64CD;&#x4F5C;&#x7B26;&#x603B;&#x662F;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x7684;&#x9009;&#x62E9;&#x3002;&#x901A;&#x8FC7;call&#x8C03;&#x7528;&#x51FD;&#x6570;&#x4E0E;&#x624B;&#x52A8;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x662F;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#x7684;&#xFF1B;&#x4F46;&#x5B83;&#x53EF;&#x4EE5;&#x66F4;&#x5BB9;&#x6613;&#x5730;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x94FE;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x8981;&#x5728;&#x8BB8;&#x591A;&#x4E0D;&#x540C;&#x7684;&#x5730;&#x65B9;&#x4EE5;&#x540C;&#x6837;&#x7684;&#x65B9;&#x5F0F;&#x8BBE;&#x7F6E;&#x4E00;&#x4E9B;&#x5C5E;&#x6027;&#x3002;&#x6211;&#x4EEC;&#x91C7;&#x53D6;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x628A;&#x5B83;&#x5305;&#x5728;&#x4E00;&#x4E2A;&#x53EF;&#x91CD;&#x590D;&#x4F7F;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function foo(selection) {</div><div class="line">  selection</div><div class="line">      .attr(&quot;name1&quot;, &quot;value1&quot;)</div><div class="line">      .attr(&quot;name2&quot;, &quot;value2&quot;);</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x5199;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foo(d3.selectAll(&quot;div&quot;));</div></pre></td></tr></table></figure></p>
+<p>&#x6216;&#x8005;&#x7B49;&#x4EF7;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d3.selectAll(&quot;div&quot;).call(foo);</div></pre></td></tr></table></figure></p>
+<p>&#x88AB;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x7684;this&#x4E0A;&#x4E0B;&#x6587;&#x4E5F;&#x662F;&#x5F53;&#x524D;&#x7684;&#x9009;&#x62E9;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7565;&#x663E;&#x591A;&#x4F59;&#x7684;&#xFF0C;&#x8FD9;&#x6211;&#x4EEC;&#x53EF;&#x80FD;&#x5728;&#x672A;&#x6765;&#x89E3;&#x51B3;&#x3002; &#x5982;&#x679C;&#x60A8;&#x4F7F;&#x7528;&#x7684;selection.call&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x65B9;&#x6CD5;&#x548C;&#x9700;&#x8981;this&#x6307;&#x5411;&#x8BE5;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x4E4B;&#x524D;&#x8C03;&#x7528;&#x7ED1;&#x5B9A;&#x5230;&#x5BF9;&#x8C61;&#x7684;&#x51FD;&#x6570;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function Foo(text) {</div><div class="line">    this.text = text;</div><div class="line">}</div><div class="line"></div><div class="line">Foo.prototype.setText = function(selection) {</div><div class="line">    selection.text(this.text);</div><div class="line">}</div><div class="line"></div><div class="line">var bar = new Foo(&quot;Bar&quot;);</div><div class="line"></div><div class="line">d3.selectAll(&quot;span&quot;).call(bar.setText.bind(bar));</div><div class="line">// Or</div><div class="line">d3.selectAll(&quot;span&quot;).call(Foo.prototype.setText.bind(bar));</div></pre></td></tr></table></figure></p>
+<h2 id="selection-empty"><a href="#selection-empty" class="headerlink" title="selection.empty()"></a>selection.empty()</h2><p>&#x8FD4;&#x56DE;true&#x5982;&#x679C;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x4E3A;&#x7A7A;&#xFF1B;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x662F;&#x7A7A;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x5143;&#x7D20;&#x6216;null&#x5143;&#x7D20;&#x3002;</p>
+<h2 id="selection-node"><a href="#selection-node" class="headerlink" title="selection.node()"></a>selection.node()</h2><p>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x975E;&#x7A7A;&#x7684;&#x5143;&#x7D20;&#x3002;&#x5982;&#x679C;&#x9009;&#x62E9;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null&#x3002;</p>
+<h2 id="selection-size"><a href="#selection-size" class="headerlink" title="selection.size()"></a>selection.size()</h2><p>Returns the total number of elements in the current selection.</p>
+<h1 id="&#x6269;&#x5C55;"><a href="#&#x6269;&#x5C55;" class="headerlink" title="&#x6269;&#x5C55;"></a>&#x6269;&#x5C55;</h1><h1 id="d3-selection"><a href="#d3-selection" class="headerlink" title="d3.selection()"></a>d3.selection()</h1><p>&#x8FD4;&#x56DE;&#x6839;&#x7684;&#x9009;&#x62E9;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;d3.select(document.documentElement)&#x3002;&#x6B64;&#x51FD;&#x6570;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x68C0;&#x67E5;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x662F;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#xFF1A;o instanceof d3.selection&#x3002;&#x60A8;&#x8FD8;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x65B9;&#x6CD5;&#x5230;&#x9009;&#x62E9;&#x7684;&#x539F;&#x5F62;&#x4E2D;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x4FBF;&#x6377;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x590D;&#x9009;&#x6846;&#x7684;checked&#x5C5E;&#x6027;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x8FD9;&#x6837;&#x5199;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">d3.selection.prototype.checked = function(value) {</div><div class="line">  return arguments.length &lt; 1</div><div class="line">      ? this.property(&quot;checked&quot;)</div><div class="line">      : this.property(&quot;checked&quot;, value);</div><div class="line">};</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/d3基础/" rel="tag"># d3基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/09/2017-3-9/" rel="next" title="2017-3-9">
+                <i class="fa fa-chevron-left"></i> 2017-3-9
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="吃饼干的怪兽" />
+          <p class="site-author-name" itemprop="name">吃饼干的怪兽</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#选择元素"><span class="nav-number">1.</span> <span class="nav-text">选择元素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-select-selector"><span class="nav-number">1.1.</span> <span class="nav-text">d3.select(selector)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-select-node"><span class="nav-number">1.2.</span> <span class="nav-text">d3.select(node)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-selectAll-selector"><span class="nav-number">1.3.</span> <span class="nav-text">d3.selectAll(selector)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-selectAll-nodes"><span class="nav-number">1.4.</span> <span class="nav-text">d3.selectAll(nodes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-attr-name-value"><span class="nav-number">1.5.</span> <span class="nav-text">selection.attr(name[, value])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-classed-name-value"><span class="nav-number">1.6.</span> <span class="nav-text">selection.classed(name[, value])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-style-name-value-priority"><span class="nav-number">1.7.</span> <span class="nav-text">selection.style(name[, value[, priority]])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-property-name-value"><span class="nav-number">1.8.</span> <span class="nav-text">selection.property(name[, value])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-text-value"><span class="nav-number">1.9.</span> <span class="nav-text">selection.text([value])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-html-value"><span class="nav-number">1.10.</span> <span class="nav-text">selection.html([value])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-append-name"><span class="nav-number">1.11.</span> <span class="nav-text">selection.append(name)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-insert-name-before"><span class="nav-number">1.12.</span> <span class="nav-text">selection.insert(name[, before])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-remove"><span class="nav-number">1.13.</span> <span class="nav-text">selection.remove()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-data-values-key"><span class="nav-number">1.14.</span> <span class="nav-text">selection.data([values[, key]])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-enter"><span class="nav-number">1.15.</span> <span class="nav-text">selection.enter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-exit"><span class="nav-number">1.16.</span> <span class="nav-text">selection.exit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-filter-selector"><span class="nav-number">1.17.</span> <span class="nav-text">selection.filter(selector)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-datum-value"><span class="nav-number">1.18.</span> <span class="nav-text">selection.datum([value])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-sort-comparator"><span class="nav-number">1.19.</span> <span class="nav-text">selection.sort([comparator])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-order"><span class="nav-number">1.20.</span> <span class="nav-text">selection.order()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画和交互"><span class="nav-number">2.</span> <span class="nav-text">动画和交互</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-on-type-listener-capture"><span class="nav-number">2.1.</span> <span class="nav-text">selection.on(type[, listener[, capture]])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-event"><span class="nav-number">2.2.</span> <span class="nav-text">d3.event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-mouse-Container"><span class="nav-number">2.3.</span> <span class="nav-text">d3.mouse(Container)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-touch-container-touches-identifier"><span class="nav-number">2.4.</span> <span class="nav-text">d3.touch(container[, touches], identifier)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d3-touches-container-touches"><span class="nav-number">2.5.</span> <span class="nav-text">d3.touches(container[, touches])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-transition-name"><span class="nav-number">2.6.</span> <span class="nav-text">selection.transition([name])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-interrupt-name"><span class="nav-number">2.7.</span> <span class="nav-text">selection.interrupt([name])</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子选择"><span class="nav-number">3.</span> <span class="nav-text">子选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-select-selector"><span class="nav-number">3.1.</span> <span class="nav-text">selection.select(selector)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-selectAll-selector"><span class="nav-number">3.2.</span> <span class="nav-text">selection.selectAll(selector)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制"><span class="nav-number">4.</span> <span class="nav-text">控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-each-function"><span class="nav-number">4.1.</span> <span class="nav-text">selection.each(function)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-call-function-arguments…"><span class="nav-number">4.2.</span> <span class="nav-text">selection.call(function[, arguments…])</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-empty"><span class="nav-number">4.3.</span> <span class="nav-text">selection.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-node"><span class="nav-number">4.4.</span> <span class="nav-text">selection.node()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-size"><span class="nav-number">4.5.</span> <span class="nav-text">selection.size()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展"><span class="nav-number">5.</span> <span class="nav-text">扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d3-selection"><span class="nav-number">6.</span> <span class="nav-text">d3.selection()</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吃饼干的怪兽</span>
+</div>
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
